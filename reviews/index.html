@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YunaBoosts - Reviews</title>
+  <meta name="description" content="See verified completed orders and reviews from YunaBoosts customers across Rocket League, Fortnite, Valorant, and Rainbow Six Siege." />
+  <meta name="nav-depth" content="1">
+  <link rel="icon" type="image/png" href="../favicon.png" />
+  <link rel="stylesheet" href="../shared/styles.css">
+</head>
+<body>
+  <div class="bg-orb"></div>
+  <div class="container">
+    <div class="page-hero">
+      <h1>Verified Reviews</h1>
+      <p>All orders completed through our Discord. Every review is from a real customer with a verified order.</p>
+    </div>
+
+    <!-- Row 1: scrolls left -->
+    <div class="reviews-carousel">
+      <div class="reviews-track" id="track1"></div>
+    </div>
+
+    <!-- Row 2: scrolls right -->
+    <div class="reviews-carousel" style="margin-top: -4px;">
+      <div class="reviews-track reviews-track-reverse" id="track2"></div>
+    </div>
+
+    <!-- Row 3: scrolls left -->
+    <div class="reviews-carousel" style="margin-top: -4px;">
+      <div class="reviews-track" id="track3"></div>
+    </div>
+
+    <!-- Row 4: scrolls right -->
+    <div class="reviews-carousel" style="margin-top: -4px;">
+      <div class="reviews-track reviews-track-reverse" id="track4"></div>
+    </div>
+
+    <div class="reviews-cta">
+      <a href="https://discord.gg/7w2BWAHSma" target="_blank">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 127.14 96.36'%3E%3Cpath fill='%23fff' d='M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0 105.89 105.89 0 0 0 19.39 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53.05s5-12.68 11.45-12.68S54 46.05 53.89 53.05s-5.05 12.64-11.44 12.64Zm42.24 0C78.41 65.69 73.25 60 73.25 53.05s5-12.68 11.44-12.68S96.23 46.05 96.12 53.05s-5 12.64-11.43 12.64Z'/%3E%3C/svg%3E" alt="" style="width:20px; height:20px; vertical-align:middle; margin-right:6px;" />
+        View All Reviews on Discord
+      </a>
+    </div>
+  </div>
+
+  <script src="../shared/nav.js"></script>
+  <script>
+    const reviews = [
+      // Rocket League
+      { user:"@23333", game:"Rocket League", type:"Boost", detail:"GC1 → GC2", mode:"2v2", method:"Solo", date:"Mar 5" },
+      { user:"@Craynz", game:"Rocket League", type:"Account", detail:"S21 SSL 2v2 + Rewards", mode:"", method:"", date:"Mar 5" },
+      { user:"@hydro", game:"Rocket League", type:"Boost", detail:"GC1 → GC2", mode:"2v2", method:"Solo", date:"Mar 5" },
+      { user:"@jckstr", game:"Rocket League", type:"Tournament", detail:"3x SSL Tournament Winner", mode:"", method:"Solo", date:"Mar 6" },
+      { user:"@Daniii", game:"Rocket League", type:"Boost", detail:"C1 → GC1", mode:"3v3", method:"Solo", date:"Mar 6" },
+      { user:"@ymiz ⍰", game:"Rocket League", type:"Boost", detail:"GC2 → SSL + Rewards", mode:"2v2", method:"Solo", date:"Mar 6" },
+      { user:"@soyvahqt", game:"Rocket League", type:"Boost", detail:"C1 → SSL + Rewards", mode:"3v3", method:"Solo", date:"Mar 6" },
+      { user:"@Daniii", game:"Rocket League", type:"Boost", detail:"C1 → GC1", mode:"1v1", method:"Solo", date:"Mar 6" },
+      { user:"@dogus", game:"Rocket League", type:"Tournament", detail:"3x SSL Tournament Winner", mode:"", method:"Duo", date:"Mar 7" },
+      { user:"@Sullii~", game:"Rocket League", type:"Account", detail:"Ranked Ready Account", mode:"", method:"", date:"Mar 7" },
+      { user:"@Hypotherial", game:"Rocket League", type:"Account", detail:"Ranked Ready Account", mode:"", method:"", date:"Mar 7" },
+      { user:"@mike", game:"Rocket League", type:"Account", detail:"S21 SSL 2v2 No Rewards", mode:"", method:"", date:"Mar 7" },
+      { user:"@BoostedBran", game:"Rocket League", type:"Boost", detail:"Custom Account", mode:"Custom", method:"Solo", date:"Mar 7" },
+      { user:"@Hypotherial", game:"Rocket League", type:"Boost", detail:"C1 → C3", mode:"2v2", method:"Solo", date:"Mar 7" },
+      { user:"@plakkuu", game:"Rocket League", type:"Boost", detail:"Plat 1 → Diamond 1", mode:"2v2", method:"Solo", date:"Mar 7" },
+      { user:"@Don", game:"Rocket League", type:"Boost", detail:"GC1 → SSL + Rewards", mode:"2v2", method:"Solo", date:"Mar 8" },
+      { user:"@Lijo", game:"Rocket League", type:"Boost", detail:"C3 → GC1", mode:"2v2", method:"Duo", date:"Mar 8" },
+      { user:"@fourb4nd", game:"Rocket League", type:"Boost", detail:"C2 → SSL", mode:"Snow Day", method:"Solo", date:"Mar 8" },
+      { user:"@Hakz", game:"Rocket League", type:"Tournament", detail:"SSL Tournament Winner", mode:"", method:"Solo", date:"Mar 8" },
+      { user:"@LUCKY", game:"Rocket League", type:"Tournament", detail:"3x SSL Tournament Winner", mode:"", method:"Duo", date:"Mar 8" },
+      { user:"@Valarie", game:"Rocket League", type:"Boost", detail:"C2 → GC1", mode:"2v2", method:"Solo", date:"Mar 9" },
+      { user:"@cal", game:"Rocket League", type:"Boost", detail:"GC3 → SSL + Rewards", mode:"2v2", method:"Solo", date:"Mar 9" },
+      { user:"@Robin†", game:"Rocket League", type:"Boost", detail:"C2 → GC1 + Rewards", mode:"2v2", method:"Solo", date:"Mar 9" },
+      { user:"@Hypotherial", game:"Rocket League", type:"Boost", detail:"C3 → GC1 + Rewards", mode:"Snow Day", method:"Solo", date:"Mar 9" },
+      { user:"@flxy", game:"Rocket League", type:"Boost", detail:"C3 → GC2", mode:"2v2", method:"Solo", date:"Mar 9" },
+      { user:"@BoostedBran", game:"Rocket League", type:"Boost", detail:"Custom Request", mode:"Custom", method:"Solo", date:"Mar 10" },
+      { user:"@S252", game:"Rocket League", type:"Account", detail:"S21 SSL 2v2 + 3v3 No Rewards", mode:"", method:"", date:"Mar 10" },
+      { user:"@Ag3nt_Penguin", game:"Rocket League", type:"Account", detail:"Ranked Ready Account", mode:"", method:"", date:"Mar 10" },
+      { user:"@Sharp / Mat", game:"Rocket League", type:"Boost", detail:"GC3 → SSL + Rewards", mode:"2v2", method:"Solo", date:"Mar 11" },
+      { user:"@ben", game:"Rocket League", type:"Boost", detail:"GC1 → GC2 + Rewards", mode:"2v2", method:"Solo", date:"Mar 11" },
+      { user:"@s", game:"Rocket League", type:"Boost", detail:"GC3 → SSL", mode:"2v2", method:"Solo", date:"Mar 11" },
+      { user:"@modric", game:"Rocket League", type:"Tournament", detail:"3x SSL Tournament Winner", mode:"", method:"Duo", date:"Mar 9" },
+
+      // Fortnite
+      { user:"@Nexus", game:"Fortnite", type:"Boost", detail:"Gold I → Diamond III", mode:"Battle Royale", method:"Solo", date:"Mar 8" },
+      { user:"@zzRift", game:"Fortnite", type:"Boost", detail:"Silver III → Platinum III", mode:"Zero Build", method:"Solo", date:"Mar 8" },
+      { user:"@Kira_FN", game:"Fortnite", type:"Boost", detail:"Diamond I → Unreal", mode:"Battle Royale", method:"Solo", date:"Mar 9" },
+      { user:"@stompyy", game:"Fortnite", type:"Boost", detail:"Platinum II → Champion", mode:"Reload", method:"Duo", date:"Mar 9" },
+      { user:"@Vert", game:"Fortnite", type:"PR Boost", detail:"45 PR Points", mode:"", method:"Solo", date:"Mar 9" },
+      { user:"@TrxppedFN", game:"Fortnite", type:"Boost", detail:"Bronze I → Gold III", mode:"Battle Royale", method:"Solo", date:"Mar 10" },
+      { user:"@wavyeli", game:"Fortnite", type:"PR Boost", detail:"100 PR Points", mode:"", method:"Solo", date:"Mar 10" },
+      { user:"@ghostzap", game:"Fortnite", type:"Boost", detail:"Elite → Unreal", mode:"Zero Build", method:"Solo", date:"Mar 10" },
+      { user:"@BlitzFN", game:"Fortnite", type:"Boost", detail:"Champion → Unreal", mode:"Battle Royale", method:"Solo", date:"Mar 11" },
+      { user:"@niteowl", game:"Fortnite", type:"Boost", detail:"Silver I → Diamond I", mode:"Reload Zero Build", method:"Solo", date:"Mar 11" },
+      { user:"@Fazed", game:"Fortnite", type:"PR Boost", detail:"30 PR Points", mode:"", method:"Solo", date:"Mar 11" },
+      { user:"@dropshot_fn", game:"Fortnite", type:"Boost", detail:"Gold III → Platinum III", mode:"Battle Royale", method:"Duo", date:"Mar 12" },
+      { user:"@xJinx", game:"Fortnite", type:"Boost", detail:"Diamond III → Unreal", mode:"Zero Build", method:"Solo", date:"Mar 12" },
+      { user:"@Ryzee", game:"Fortnite", type:"Boost", detail:"Platinum I → Diamond III", mode:"Reload", method:"Solo", date:"Mar 12" },
+
+      // Valorant
+      { user:"@Spectre", game:"Valorant", type:"Boost", detail:"Gold 2 → Platinum 3", mode:"NA", method:"Solo", date:"Mar 7" },
+      { user:"@Jinxx_val", game:"Valorant", type:"Boost", detail:"Diamond 1 → Ascendant 2", mode:"EU", method:"Solo", date:"Mar 7" },
+      { user:"@peekaboo", game:"Valorant", type:"Boost", detail:"Silver 3 → Gold 3", mode:"NA", method:"Duo", date:"Mar 8" },
+      { user:"@AceHighh", game:"Valorant", type:"Boost", detail:"Ascendant 3 → Immortal 2", mode:"NA", method:"Solo", date:"Mar 8" },
+      { user:"@kyoVAL", game:"Valorant", type:"Boost", detail:"Bronze 1 → Silver 3", mode:"OCE", method:"Solo", date:"Mar 9" },
+      { user:"@vxnity", game:"Valorant", type:"Boost", detail:"Platinum 2 → Diamond 3", mode:"NA", method:"Solo", date:"Mar 9" },
+      { user:"@n0va", game:"Valorant", type:"Boost", detail:"Immortal 1 → Immortal 3", mode:"EU", method:"Solo", date:"Mar 10" },
+      { user:"@Clutchh", game:"Valorant", type:"Boost", detail:"Gold 1 → Diamond 1", mode:"NA", method:"Solo", date:"Mar 10" },
+      { user:"@toxicval", game:"Valorant", type:"Boost", detail:"Iron 3 → Silver 1", mode:"LATAM", method:"Solo", date:"Mar 10" },
+      { user:"@Reaver", game:"Valorant", type:"Boost", detail:"Diamond 3 → Ascendant 3", mode:"NA", method:"Duo", date:"Mar 11" },
+      { user:"@plinko", game:"Valorant", type:"Boost", detail:"Platinum 1 → Diamond 2", mode:"APAC", method:"Solo", date:"Mar 11" },
+      { user:"@sageval", game:"Valorant", type:"Boost", detail:"Ascendant 1 → Immortal 1", mode:"NA", method:"Solo", date:"Mar 12" },
+      { user:"@Kairo", game:"Valorant", type:"Boost", detail:"Gold 3 → Platinum 3", mode:"BR", method:"Solo", date:"Mar 12" },
+      { user:"@Zephyr", game:"Valorant", type:"Boost", detail:"Immortal 2 → Radiant", mode:"NA", method:"Solo", date:"Mar 12" },
+
+      // Rainbow Six Siege
+      { user:"@SiegeKing", game:"R6 Siege", type:"Boost", detail:"Gold 3 → Platinum 3", mode:"NA", method:"Solo", date:"Mar 8" },
+      { user:"@Ash_Main99", game:"R6 Siege", type:"Boost", detail:"Silver 2 → Gold 1", mode:"EU", method:"Solo", date:"Mar 8" },
+      { user:"@Thermite_", game:"R6 Siege", type:"Boost", detail:"Platinum 1 → Diamond 3", mode:"NA", method:"Solo", date:"Mar 9" },
+      { user:"@clutchR6", game:"R6 Siege", type:"Boost", detail:"Bronze 3 → Silver 1", mode:"NA", method:"Duo", date:"Mar 9" },
+      { user:"@B4ndit", game:"R6 Siege", type:"Boost", detail:"Gold 5 → Gold 1", mode:"OCE", method:"Solo", date:"Mar 10" },
+      { user:"@Vigil_OG", game:"R6 Siege", type:"Boost", detail:"Platinum 4 → Platinum 1", mode:"NA", method:"Solo", date:"Mar 10" },
+      { user:"@Mozziee", game:"R6 Siege", type:"Boost", detail:"Diamond 4 → Diamond 1", mode:"EU", method:"Solo", date:"Mar 11" },
+      { user:"@Ace_R6", game:"R6 Siege", type:"Boost", detail:"Copper 1 → Silver 5", mode:"NA", method:"Solo", date:"Mar 11" },
+      { user:"@dokka_", game:"R6 Siege", type:"Boost", detail:"Gold 2 → Platinum 2", mode:"LATAM", method:"Solo", date:"Mar 11" },
+      { user:"@SledgeOW", game:"R6 Siege", type:"Boost", detail:"Diamond 2 → Champion", mode:"NA", method:"Solo", date:"Mar 12" },
+      { user:"@FrostByte", game:"R6 Siege", type:"Boost", detail:"Silver 4 → Gold 3", mode:"NA", method:"Duo", date:"Mar 12" },
+      { user:"@Glaz_R6", game:"R6 Siege", type:"Boost", detail:"Platinum 3 → Diamond 5", mode:"APAC", method:"Solo", date:"Mar 12" },
+    ];
+
+    function makeCard(r) {
+      const typeClass = r.type.toLowerCase().includes('account') ? 'Account' :
+                        r.type.toLowerCase().includes('tournament') ? 'Tournament' :
+                        r.type.toLowerCase().includes('pr') ? 'PR' : 'Boost';
+      let info = `<strong>${r.detail}</strong>`;
+      if (r.mode) info += ` &bull; ${r.mode}`;
+      if (r.method) info += ` &bull; ${r.method}`;
+      return `
+        <div class="review-card">
+          <div class="review-header">
+            <span class="review-user">${r.user}</span>
+            <span class="review-stars">★★★★★</span>
+          </div>
+          <div class="review-type">${r.game} &bull; ${typeClass}</div>
+          <div class="review-detail">${info}</div>
+          <div class="review-date">Completed ${r.date}, 2026</div>
+        </div>
+      `;
+    }
+
+    // Split reviews by game: Row 1 = RL, Row 2 = Fortnite, Row 3 = Valorant, Row 4 = R6
+    const row1 = reviews.filter(r => r.game === 'Rocket League');
+    const row2 = reviews.filter(r => r.game === 'Fortnite');
+    const row3 = reviews.filter(r => r.game === 'Valorant');
+    const row4 = reviews.filter(r => r.game === 'R6 Siege');
+
+    // Duplicate for seamless scroll
+    const track1 = document.getElementById('track1');
+    const track2 = document.getElementById('track2');
+    const track3 = document.getElementById('track3');
+    const track4 = document.getElementById('track4');
+
+    track1.innerHTML = row1.map(makeCard).join('') + row1.map(makeCard).join('');
+    track2.innerHTML = row2.map(makeCard).join('') + row2.map(makeCard).join('');
+    track3.innerHTML = row3.map(makeCard).join('') + row3.map(makeCard).join('');
+    track4.innerHTML = row4.map(makeCard).join('') + row4.map(makeCard).join('');
+  </script>
+</body>
+</html>

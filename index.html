@@ -1,0 +1,2865 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>YunaBoosts - Home</title>
+  <meta name="description" content="Yuna Boosts, premium Rocket League boosting." />
+  <meta name="nav-depth" content="0">
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link rel="stylesheet" href="shared/styles.css">
+
+  <style>
+    :root{ color-scheme: dark; }
+    :root{
+      --bg0:#040b1a;
+      --bg1:#061433;
+      --bg2:#081a44;
+
+      --text:#eaf2ff;
+      --muted: rgba(234,242,255,.70);
+
+      --brand:#2f7cff;
+      --brand2:#69b3ff;
+
+      --shadow: 0 20px 70px rgba(0,0,0,.55);
+      --glow: 0 0 0 1px rgba(47,124,255,.35), 0 0 34px rgba(47,124,255,.24);
+
+      --radius: 18px;
+      --radius2: 24px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: var(--bg0);
+      background-image:
+        radial-gradient(900px 520px at 10% 15%, rgba(47,124,255,.34), transparent 58%),
+        radial-gradient(900px 520px at 88% 22%, rgba(105,179,255,.18), transparent 55%),
+        radial-gradient(900px 520px at 60% 95%, rgba(47,124,255,.16), transparent 60%),
+        linear-gradient(180deg, #040b1a, #061433, #081a44);
+      background-attachment: fixed;
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+      overflow-x:hidden;
+    }
+
+    .bg-orb{
+      position:fixed; inset:-140px;
+      background:
+        radial-gradient(520px 420px at 18% 25%, rgba(105,179,255,.16), transparent 60%),
+        radial-gradient(560px 440px at 78% 35%, rgba(47,124,255,.20), transparent 62%),
+        radial-gradient(560px 440px at 55% 78%, rgba(47,124,255,.16), transparent 62%);
+      filter: blur(10px);
+      opacity:.95;
+      pointer-events:none;
+      animation: drift 16s ease-in-out infinite;
+    }
+    @keyframes drift{
+      0%,100% { transform: translate3d(0,0,0) scale(1); }
+      50% { transform: translate3d(16px,-10px,0) scale(1.02); }
+    }
+
+    .container{
+      width:min(1180px, calc(100% - 40px));
+      margin:0 auto;
+      padding: 26px 0 56px;
+      position:relative;
+      z-index:1;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding: 6px 0 18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      user-select:none;
+      min-width: 220px;
+    }
+    .logo{
+      width:44px; height:44px;
+      border-radius: 16px;
+      overflow:hidden;
+      box-shadow: 0 18px 50px rgba(47,124,255,.22), 0 0 0 1px rgba(255,255,255,.10) inset;
+      background: rgba(255,255,255,.06);
+      flex: 0 0 auto;
+    }
+    .logo img{ width:100%; height:100%; object-fit:cover; display:block; transform: scale(1.02); }
+    .brand h1{
+      margin:0;
+      font-size: 18px;
+      letter-spacing:.5px;
+      text-transform:uppercase;
+      color: rgba(255,255,255,.95);
+      line-height:1.1;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items:start;
+    }
+
+    .card{
+      border:1px solid rgba(90,160,255,.18);
+      background: linear-gradient(180deg, rgba(8, 26, 68, .72), rgba(6, 18, 45, .78));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      position:relative;
+    }
+    .card .edge-glow{
+      position:absolute; inset:-1px;
+      border-radius: inherit;
+      pointer-events:none;
+      box-shadow: var(--glow);
+      opacity:.95;
+    }
+
+    .calc{ padding: 18px; overflow: visible; position:relative; z-index:2; }
+    .calc h2{ margin: 2px 0 8px; font-size: 18px; letter-spacing:.2px; }
+    .calc p{ margin:0 0 14px; color: var(--muted); font-size: 13.5px; line-height:1.45; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .span-2{ grid-column: 1 / -1; }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      padding: 12px;
+      border-radius: var(--radius);
+      border:1px solid rgba(90,160,255,.18);
+      background: rgba(5, 14, 36, .45);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+      position:relative;
+      overflow: visible;
+      z-index:0;
+    }
+    .field:hover{
+      transform: translateY(-1px);
+      border-color: rgba(90,160,255,.35);
+      background: rgba(5, 14, 36, .55);
+      box-shadow: 0 18px 55px rgba(0,0,0,.25);
+    }
+    .field.field-open{
+      z-index: 30000;
+      transform: none;
+    }
+
+    label{
+      font-size: 12px;
+      color: rgba(255,255,255,.80);
+      letter-spacing:.2px;
+    }
+
+    .input, .textarea{
+      width:100%;
+      border-radius: 16px;
+      padding: 12px 12px;
+      border: 1px solid rgba(90,160,255,.20);
+      background: linear-gradient(180deg, rgba(8,26,68,.60), rgba(6,18,45,.66));
+      color: rgba(255,255,255,.94);
+      font-size: 13.8px;
+      letter-spacing:.15px;
+      outline:none;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.05) inset;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+    }
+    .input:hover, .textarea:hover{ border-color: rgba(90,160,255,.42); transform: translateY(-1px); }
+    .input:focus, .textarea:focus{
+      border-color: rgba(47,124,255,.80);
+      box-shadow: 0 0 0 4px rgba(47,124,255,.18), 0 0 28px rgba(47,124,255,.16);
+      transform:none;
+    }
+    .textarea{ min-height: 110px; resize: vertical; }
+
+    select.native-hidden{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+      width:1px; height:1px;
+    }
+
+    .cs{ position:relative; z-index:1; }
+    .cs.open{ z-index: 31000; }
+
+    .cs-btn{
+      width:100%;
+      text-align:left;
+      border-radius: 16px;
+      padding: 12px 42px 12px 12px;
+      border: 1px solid rgba(90,160,255,.20);
+      background: linear-gradient(180deg, rgba(8,26,68,.60), rgba(6,18,45,.66));
+      color: rgba(255,255,255,.94);
+      font-size: 13.8px;
+      letter-spacing:.15px;
+      cursor:pointer;
+      transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+      outline:none;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.05) inset;
+    }
+    .cs-btn:hover{
+      border-color: rgba(90,160,255,.42);
+      transform: translateY(-1px);
+    }
+    .cs-btn:focus{
+      border-color: rgba(47,124,255,.80);
+      box-shadow: 0 0 0 4px rgba(47,124,255,.18), 0 0 28px rgba(47,124,255,.16);
+    }
+
+    .cs-caret{
+      position:absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      opacity:.92;
+      pointer-events:none;
+      filter: drop-shadow(0 0 10px rgba(47,124,255,.30));
+      background:
+        linear-gradient(45deg, transparent 50%, rgba(255,255,255,.90) 50%),
+        linear-gradient(135deg, rgba(255,255,255,.90) 50%, transparent 50%);
+      background-position: 0 0, 7px 0;
+      background-size: 7px 7px, 7px 7px;
+      background-repeat:no-repeat;
+    }
+
+    .cs-menu{
+      position:absolute;
+      left:0; right:0;
+      top: calc(100% + 8px);
+      border-radius: 16px;
+      border: 1px solid rgba(90,160,255,.26);
+      background: linear-gradient(180deg, rgba(6,18,45,.98), rgba(8,26,68,.98));
+      box-shadow: 0 24px 70px rgba(0,0,0,.65), 0 0 0 1px rgba(47,124,255,.10) inset;
+      backdrop-filter: blur(14px);
+      max-height: 280px;
+      overflow:auto;
+      z-index: 32000;
+      padding: 6px;
+      display:none;
+    }
+    .cs.open .cs-menu{ display:block; }
+
+    .cs-opt{
+      padding: 10px 10px;
+      border-radius: 12px;
+      cursor:pointer;
+      color: rgba(255,255,255,.92);
+      font-size: 13.5px;
+      border: 1px solid transparent;
+      transition: background .14s ease, border-color .14s ease, transform .14s ease;
+      user-select:none;
+    }
+    .cs-opt:hover{
+      background: rgba(47,124,255,.14);
+      border-color: rgba(90,160,255,.22);
+      transform: translateY(-1px);
+    }
+    .cs-opt[aria-selected="true"]{
+      background: rgba(47,124,255,.22);
+      border-color: rgba(47,124,255,.35);
+      box-shadow: 0 0 0 3px rgba(47,124,255,.14);
+    }
+    .cs-opt.disabled{
+      opacity: .40;
+      cursor: not-allowed;
+      background: transparent;
+      border-color: transparent;
+      transform: none;
+    }
+    .cs-opt.disabled:hover{
+      background: transparent;
+      border-color: transparent;
+      transform: none;
+    }
+
+    .seg{
+      display:flex;
+      gap:10px;
+      padding: 12px;
+      border-radius: var(--radius);
+      border:1px solid rgba(90,160,255,.18);
+      background: rgba(5, 14, 36, .45);
+      align-items:center;
+      justify-content:space-between;
+    }
+    .toggle{ display:flex; gap:10px; }
+    .btn{
+      cursor:pointer;
+      user-select:none;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      border:1px solid rgba(90,160,255,.18);
+      background: rgba(8, 26, 68, .45);
+      color: rgba(255,255,255,.88);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+      display:flex; align-items:center; gap:8px;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(90,160,255,.35);
+      box-shadow: 0 14px 40px rgba(0,0,0,.22);
+    }
+    .btn.active{
+      border-color: rgba(47,124,255,.85);
+      background: rgba(47,124,255,.22);
+      box-shadow: 0 0 0 4px rgba(47,124,255,.14), 0 0 26px rgba(47,124,255,.16);
+    }
+
+    .discord-cta{ margin-top: 14px; display:flex; gap: 10px; }
+    .discord-btn{
+      width:100%;
+      cursor:pointer;
+      border:none;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-weight: 950;
+      letter-spacing:.2px;
+      color: #eaf2ff;
+      background: linear-gradient(135deg, rgba(47,124,255,1), rgba(105,179,255,1));
+      box-shadow: 0 18px 46px rgba(47,124,255,.22), 0 0 0 1px rgba(255,255,255,.10) inset;
+      transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+      text-align:center;
+    }
+    .discord-btn:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 22px 60px rgba(47,124,255,.26), 0 0 0 1px rgba(255,255,255,.12) inset;
+    }
+    .discord-btn:active{ transform: translateY(0px) scale(.99); }
+
+    .checkout{
+      padding: 18px;
+      position:sticky;
+      top: 16px;
+      overflow: visible;
+      background: linear-gradient(180deg, rgba(8,26,68,.78), rgba(6,18,45,.84));
+      border-color: rgba(90,160,255,.22);
+      z-index:1;
+    }
+    .checkout-title{
+      font-size: 12px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.60);
+      margin: 2px 0 14px;
+    }
+    .sum{
+      border-radius: var(--radius2);
+      border: 1px solid rgba(90,160,255,.18);
+      background: rgba(5, 14, 36, .42);
+      padding: 14px;
+    }
+    .sum-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      font-size: 13.5px;
+    }
+    .sum-row:last-of-type{ border-bottom:none; }
+    .sum-left{ color: rgba(255,255,255,.60); }
+    .sum-right{
+      color: rgba(255,255,255,.94);
+      font-weight: 800;
+      text-align:right;
+      white-space:nowrap;
+    }
+    .sum-divider{ height: 1px; background: rgba(255,255,255,.14); margin: 14px 0; }
+
+    .total-wrap{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap: 16px;
+      padding-top: 8px;
+    }
+    .total-wrap .label{
+      color: rgba(255,255,255,.92);
+      font-weight: 900;
+      font-size: 16px;
+    }
+    .total-wrap .price{
+      font-size: 34px;
+      font-weight: 950;
+      letter-spacing:-.6px;
+      color: rgba(255,255,255,.96);
+      text-shadow: 0 0 22px rgba(47,124,255,.16);
+    }
+
+    .eta{
+      margin-top: 10px;
+      color: rgba(255,255,255,.62);
+      font-size: 12.5px;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .eta .clock{
+      width: 16px; height:16px;
+      border-radius: 99px;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: 0 0 18px rgba(47,124,255,.14);
+      position:relative;
+    }
+    .eta .clock:after{
+      content:"";
+      position:absolute;
+      left:50%; top:50%;
+      width: 1px; height: 6px;
+      background: rgba(255,255,255,.74);
+      transform: translate(-50%,-80%) rotate(25deg);
+      transform-origin: bottom;
+    }
+
+    .cta{ margin-top: 14px; display:flex; flex-direction:column; gap:10px; }
+
+    .primary{
+      cursor:pointer;
+      border:none;
+      border-radius: 14px;
+      padding: 14px 14px;
+      font-weight: 950;
+      letter-spacing:.2px;
+      color: #eaf2ff;
+      background: linear-gradient(135deg, rgba(47,124,255,1), rgba(105,179,255,1));
+      box-shadow: 0 18px 46px rgba(47,124,255,.22), 0 0 0 1px rgba(255,255,255,.10) inset;
+      transition: transform .16s ease, box-shadow .16s ease, filter .16s ease;
+    }
+    .primary:hover{
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 22px 60px rgba(47,124,255,.26), 0 0 0 1px rgba(255,255,255,.12) inset;
+    }
+    .primary:active{ transform: translateY(0px) scale(.99); }
+    .primary:disabled{ opacity:.55; cursor:not-allowed; filter:saturate(.8); box-shadow:none; }
+
+    .status{
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(90,160,255,.18);
+      background: rgba(5, 14, 36, .35);
+      color: rgba(255,255,255,.78);
+      font-size: 12.5px;
+      line-height:1.45;
+    }
+    .status.ok{ border-color: rgba(47,124,255,.30); }
+    .status.bad{ border-color: rgba(255,90,122,.28); }
+
+    footer{
+      margin-top: 18px;
+      color: rgba(234,242,255,.55);
+      font-size: 12px;
+      line-height:1.5;
+      text-align:center;
+    }
+
+
+    .check-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 2px;
+    }
+    .check-item{
+      position:relative;
+      display:block;
+      cursor:pointer;
+    }
+    .check-item input{
+      position:absolute;
+      opacity:0;
+      pointer-events:none;
+    }
+    .check-pill{
+      border-radius: 18px;
+      border:1px solid rgba(90,160,255,.18);
+      background: rgba(5, 14, 36, .45);
+      padding: 12px 12px 12px 42px;
+      min-height: 72px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap: 4px;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+      position:relative;
+    }
+    .check-pill:hover{
+      transform: translateY(-1px);
+      border-color: rgba(90,160,255,.35);
+      box-shadow: 0 14px 40px rgba(0,0,0,.22);
+      background: rgba(8, 26, 68, .52);
+    }
+    .check-pill::before{
+      content:"";
+      position:absolute;
+      left: 14px;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      border-radius: 5px;
+      border:1px solid rgba(90,160,255,.40);
+      background: rgba(8, 26, 68, .58);
+      transform: translateY(-50%);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.05) inset;
+      transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .check-pill::after{
+      content:"\2713";
+      position:absolute;
+      left: 18px;
+      top: 50%;
+      transform: translateY(-56%) scale(.75);
+      opacity:0;
+      color: rgba(255,255,255,.95);
+      font-size: 12px;
+      font-weight: 900;
+      transition: opacity .16s ease, transform .16s ease;
+      text-shadow: 0 0 14px rgba(47,124,255,.24);
+    }
+    .check-item input:checked + .check-pill{
+      border-color: rgba(47,124,255,.85);
+      background: rgba(47,124,255,.18);
+      box-shadow: 0 0 0 4px rgba(47,124,255,.12), 0 0 26px rgba(47,124,255,.16);
+    }
+    .check-item input:checked + .check-pill::before{
+      border-color: rgba(47,124,255,.85);
+      background: rgba(47,124,255,.50);
+      box-shadow: 0 0 0 4px rgba(47,124,255,.12);
+    }
+    .check-item input:checked + .check-pill::after{
+      opacity:1;
+      transform: translateY(-56%) scale(1);
+    }
+    .check-name{
+      font-size: 13.5px;
+      font-weight: 900;
+      color: rgba(255,255,255,.95);
+      line-height:1.2;
+    }
+    .check-price{
+      font-size: 12px;
+      color: var(--muted);
+      line-height:1.2;
+    }
+
+    @media (max-width: 980px){
+      .layout{ grid-template-columns: 1fr; }
+      .checkout{ position:relative; top:auto; }
+    }
+    @media (max-width: 720px){
+      .grid{ grid-template-columns: 1fr; }
+      header{ flex-direction:column; align-items:flex-start; }
+    }
+
+    .game-selector{
+      display:flex; gap:8px; margin-bottom:16px; justify-content:center; flex-wrap:wrap;
+    }
+    .game-btn{
+      cursor:pointer; user-select:none; padding:10px 20px; border-radius:999px;
+      font-size:13px; font-weight:800; border:1px solid rgba(90,160,255,.18);
+      background:rgba(8,26,68,.45); color:rgba(255,255,255,.88);
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+      white-space:nowrap;
+    }
+    .game-btn:hover{
+      transform:translateY(-1px); border-color:rgba(90,160,255,.35);
+      box-shadow:0 14px 40px rgba(0,0,0,.22);
+    }
+    .game-btn.active{
+      border-color:rgba(47,124,255,.85); background:rgba(47,124,255,.22);
+      box-shadow:0 0 0 4px rgba(47,124,255,.14), 0 0 26px rgba(47,124,255,.16);
+    }
+    .game-panel{ display:none; }
+    .game-panel.active{ display:block; }
+  </style>
+</head>
+<body>
+  <div class="bg-orb"></div>
+
+  <div class="container">
+
+    <div class="game-selector">
+      <div class="game-btn active" data-game="rl">Rocket League</div>
+      <div class="game-btn" data-game="fortnite">Fortnite</div>
+      <div class="game-btn" data-game="valorant">Valorant</div>
+      <div class="game-btn" data-game="r6">Rainbow Six Siege</div>
+    </div>
+
+    <section class="layout">
+      <div class="card calc">
+        <div class="edge-glow" aria-hidden="true"></div>
+        <h2>YunaBoosts</h2>
+        <p id="calcSubtitle">#1 Rocket League Boosting Service</p>
+
+        <div id="rlPanel" class="game-panel active">
+        <div class="seg" style="margin-bottom:12px;">
+          <div>
+            <div style="font-weight:950; font-size:13.5px;">Order Type</div>
+            <div style="color:var(--muted); font-size:12px; margin-top:2px;">Boosts or Accounts</div>
+          </div>
+          <div class="toggle" role="tablist" aria-label="Order Type">
+            <div class="btn active" id="boostsBtn" role="tab" tabindex="0" aria-selected="true">Boosts</div>
+            <div class="btn" id="accountsBtn" role="tab" tabindex="0" aria-selected="false">Accounts</div>
+          </div>
+        </div>
+
+        <div id="boostsPanel">
+          <div class="seg">
+            <div>
+              <div style="font-weight:950; font-size:13.5px;">Completion Method</div>
+              <div style="color:var(--muted); font-size:12px; margin-top:2px;">Solo = We play on your account | Duo = We play together</div>
+            </div>
+            <div class="toggle" role="tablist" aria-label="Completion Method">
+              <div class="btn active" id="soloBtn" role="tab" tabindex="0" aria-selected="true">Solo</div>
+              <div class="btn" id="duoBtn" role="tab" tabindex="0" aria-selected="false">Duo</div>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="field" id="regionField" style="display:none;">
+            <label>Region (Duo Only)</label>
+            <select id="region" class="native-hidden" aria-label="Region"></select>
+            <div class="cs" data-for="region" id="csRegion">
+              <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+              <span class="cs-caret" aria-hidden="true"></span>
+              <div class="cs-menu" role="listbox"></div>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="field">
+            <label>Playlist</label>
+            <select id="playlist" class="native-hidden" aria-label="Playlist"></select>
+            <div class="cs" data-for="playlist" id="csPlaylist">
+              <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+              <span class="cs-caret" aria-hidden="true"></span>
+              <div class="cs-menu" role="listbox"></div>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="seg" id="boostRewardsSeg">
+            <div>
+              <div style="font-weight:950; font-size:13.5px;">Rewards</div>
+              <div style="color:var(--muted); font-size:12px; margin-top:2px;">Adds season rewards for the desired rank</div>
+            </div>
+            <div class="toggle">
+              <div class="btn" id="rewardsToggleBtn" role="switch" tabindex="0" aria-checked="false">Rewards Off</div>
+            </div>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <div class="grid" id="rankGrid">
+            <div class="field">
+              <label>Current Rank</label>
+              <select id="rankCurrent" class="native-hidden" aria-label="Current Rank"></select>
+              <div class="cs" data-for="rankCurrent" id="csRankCurrent">
+                <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                <span class="cs-caret" aria-hidden="true"></span>
+                <div class="cs-menu" role="listbox"></div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Desired Rank</label>
+              <select id="rankDesired" class="native-hidden" aria-label="Desired Rank"></select>
+              <div class="cs" data-for="rankDesired" id="csRankDesired">
+                <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                <span class="cs-caret" aria-hidden="true"></span>
+                <div class="cs-menu" role="listbox"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" id="sslTargetField" style="display:none; margin-top:12px;">
+            <label>SSL Target MMR</label>
+            <input class="input" id="sslTargetMmr" type="number" inputmode="numeric" min="1875" max="2100" placeholder="Enter desired SSL MMR (1875-2100)" />
+            <div style="margin-top:8px; color:var(--muted); font-size:12px;">Leave blank for base SSL at 1875 MMR. Rewards can be added with the Rewards toggle.</div>
+          </div>
+
+          <div class="grid" id="sslBothField" style="display:none; margin-top:12px;">
+            <div class="field">
+              <label>Current SSL MMR</label>
+              <input class="input" id="sslCurrentMmr" type="number" inputmode="numeric" min="1850" max="2100" placeholder="1850-2100" />
+            </div>
+            <div class="field">
+              <label>Desired SSL MMR</label>
+              <input class="input" id="sslDesiredMmr" type="number" inputmode="numeric" min="1875" max="2100" placeholder="1875-2100" />
+            </div>
+          </div>
+
+          <div class="field" id="tournamentField" style="display:none; margin-top:12px;">
+            <label>Tournament Goal</label>
+            <select id="tournamentTarget" class="native-hidden" aria-label="Tournament Goal"></select>
+            <div class="cs" data-for="tournamentTarget" id="csTournamentTarget">
+              <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+              <span class="cs-caret" aria-hidden="true"></span>
+              <div class="cs-menu" role="listbox"></div>
+            </div>
+          </div>
+
+          <div class="field" id="customField" style="display:none; margin-top:12px;">
+            <label>Custom Request</label>
+            <textarea class="textarea" id="customDetails" placeholder="Type what you want (custom orders are quoted in Discord)."></textarea>
+            <div style="margin-top:8px; color:var(--muted); font-size:12px;">Price and time will be shown as TBD.</div>
+          </div>
+        </div>
+
+        <div id="accountsPanel" style="display:none;">
+          <div class="field">
+            <label>Select Account</label>
+            <select id="accountSelect" class="native-hidden" aria-label="Account"></select>
+            <div class="cs" data-for="accountSelect" id="csAccountSelect">
+              <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+              <span class="cs-caret" aria-hidden="true"></span>
+              <div class="cs-menu" role="listbox"></div>
+            </div>
+          </div>
+
+          <div class="field" id="customAccountField" style="display:none; margin-top:12px;">
+            <label>Custom Account</label>
+            <div class="check-grid" id="customAccountOptions">
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="ssl_2v2" />
+                <div class="check-pill">
+                  <div class="check-name">SSL in 2v2</div>
+                  <div class="check-price">$20</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="ssl_3v3" />
+                <div class="check-pill">
+                  <div class="check-name">SSL in 3v3</div>
+                  <div class="check-price">$30</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="ssl_snowday" />
+                <div class="check-pill">
+                  <div class="check-name">SSL in Snowday</div>
+                  <div class="check-price">$30</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="ssl_rewards" />
+                <div class="check-pill">
+                  <div class="check-name">SSL Rewards</div>
+                  <div class="check-price">$10</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="ssl_title" />
+                <div class="check-pill">
+                  <div class="check-name">SSL Title</div>
+                  <div class="check-price">$15</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="pink_ssl_title" />
+                <div class="check-pill">
+                  <div class="check-name">Pink SSL Title</div>
+                  <div class="check-price">$40</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="gc2_1v1" />
+                <div class="check-pill">
+                  <div class="check-name">GC2 in 1v1</div>
+                  <div class="check-price">$15</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="gc2_rumble" />
+                <div class="check-pill">
+                  <div class="check-name">GC2 in Rumble</div>
+                  <div class="check-price">$15</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="d1_hoops" />
+                <div class="check-pill">
+                  <div class="check-name">Diamond I in Hoops</div>
+                  <div class="check-price">$10</div>
+                </div>
+              </label>
+              <label class="check-item">
+                <input type="checkbox" class="custom-account-option" value="d1_heatseeker" />
+                <div class="check-pill">
+                  <div class="check-name">Diamond I in Heatseeker</div>
+                  <div class="check-price">$10</div>
+                </div>
+              </label>
+            </div>
+            <div style="margin-top:10px; color:var(--muted); font-size:12px;">Check everything you want on the account. The price updates instantly.</div>
+          </div>
+
+          <div class="field" style="margin-top:12px;">
+            <label>Info</label>
+            <div style="color:rgba(255,255,255,.88); font-size:13.5px; line-height:1.45;">
+              Images available in Discord - open a ticket to view account images and purchase.
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div id="fortnitePanel" class="game-panel">
+          <div class="seg" style="margin-bottom:12px;">
+            <div>
+              <div style="font-weight:950; font-size:13.5px;">Service Type</div>
+              <div style="color:var(--muted); font-size:12px; margin-top:2px;">Rank Boosting or PR Boosting</div>
+            </div>
+            <div class="toggle">
+              <div class="btn active" id="fnRankBtn" tabindex="0">Rank Boosting</div>
+              <div class="btn" id="fnPrBtn" tabindex="0">PR Boosting</div>
+            </div>
+          </div>
+
+          <div id="fnRankPanel">
+            <div class="seg" style="margin-bottom:12px;">
+              <div>
+                <div style="font-weight:950; font-size:13.5px;">Completion Method</div>
+                <div style="color:var(--muted); font-size:12px; margin-top:2px;">Solo = We play on your account | Duo = We play together</div>
+              </div>
+              <div class="toggle">
+                <div class="btn active" id="fnSoloBtn" tabindex="0">Solo</div>
+                <div class="btn" id="fnDuoBtn" tabindex="0">Duo</div>
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom:12px;">
+              <label>Game Mode</label>
+              <select id="fnMode" class="native-hidden" aria-label="Game Mode"></select>
+              <div class="cs" data-for="fnMode" id="csFnMode">
+                <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                <span class="cs-caret" aria-hidden="true"></span>
+                <div class="cs-menu" role="listbox"></div>
+              </div>
+            </div>
+
+            <div class="field" id="fnRegionField" style="margin-bottom:12px; display:none;">
+              <label>Region (Duo Only)</label>
+              <select id="fnRegion" class="native-hidden" aria-label="Region"></select>
+              <div class="cs" data-for="fnRegion" id="csFnRegion">
+                <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                <span class="cs-caret" aria-hidden="true"></span>
+                <div class="cs-menu" role="listbox"></div>
+              </div>
+            </div>
+
+            <div class="grid">
+              <div class="field">
+                <label>Current Rank</label>
+                <select id="fnCurrent" class="native-hidden" aria-label="Current Rank"></select>
+                <div class="cs" data-for="fnCurrent" id="csFnCurrent">
+                  <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                  <span class="cs-caret" aria-hidden="true"></span>
+                  <div class="cs-menu" role="listbox"></div>
+                </div>
+              </div>
+              <div class="field">
+                <label>Desired Rank</label>
+                <select id="fnDesired" class="native-hidden" aria-label="Desired Rank"></select>
+                <div class="cs" data-for="fnDesired" id="csFnDesired">
+                  <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                  <span class="cs-caret" aria-hidden="true"></span>
+                  <div class="cs-menu" role="listbox"></div>
+                </div>
+              </div>
+            </div>
+            <div class="field" id="fnCompletionField" style="display:none; margin-top:12px;">
+              <label>Current Completion % (0–99)</label>
+              <input class="input" id="fnCompletion" type="number" inputmode="numeric" min="0" max="99" placeholder="0–99%" />
+              <div style="color:var(--muted); font-size:12px; margin-top:4px;">How far through your current rank division you are</div>
+            </div>
+          </div>
+
+          <div id="fnPrPanel" style="display:none;">
+            <div class="field">
+              <label>PR Points Desired</label>
+              <input class="input" id="fnPrPoints" type="number" inputmode="numeric" min="10" step="10" placeholder="e.g. 100" />
+              <div style="color:var(--muted); font-size:12px; margin-top:4px;">$0.10 per PR point (increments of 10) &bull; Solo only (we log into your account)</div>
+            </div>
+            <div class="status bad" style="margin-top:12px;">
+              <strong>Requirements for PR Boosting:</strong><br/>
+              &bull; Account must have 14 out of 14 events played<br/>
+              &bull; 2FA must be enabled<br/>
+              &bull; Account must be eligible to play prize money tournaments<br/>
+              <br/>If your account does not meet these requirements, PR boosting cannot be done.
+            </div>
+          </div>
+        </div>
+
+        <div id="valorantPanel" class="game-panel">
+          <div class="seg" style="margin-bottom:12px;">
+            <div>
+              <div style="font-weight:950; font-size:13.5px;">Completion Method</div>
+              <div style="color:var(--muted); font-size:12px; margin-top:2px;">Solo = We play on your account | Duo = We play together</div>
+            </div>
+            <div class="toggle">
+              <div class="btn active" id="valSoloBtn" tabindex="0">Solo</div>
+              <div class="btn" id="valDuoBtn" tabindex="0">Duo</div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom:12px;">
+            <label>Region</label>
+            <select id="valRegion" class="native-hidden" aria-label="Region"></select>
+            <div class="cs" data-for="valRegion" id="csValRegion">
+              <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+              <span class="cs-caret" aria-hidden="true"></span>
+              <div class="cs-menu" role="listbox"></div>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="field">
+              <label>Current Rank</label>
+              <select id="valCurrent" class="native-hidden" aria-label="Current Rank"></select>
+              <div class="cs" data-for="valCurrent" id="csValCurrent">
+                <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                <span class="cs-caret" aria-hidden="true"></span>
+                <div class="cs-menu" role="listbox"></div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Desired Rank</label>
+              <select id="valDesired" class="native-hidden" aria-label="Desired Rank"></select>
+              <div class="cs" data-for="valDesired" id="csValDesired">
+                <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                <span class="cs-caret" aria-hidden="true"></span>
+                <div class="cs-menu" role="listbox"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid" style="margin-top:12px;">
+            <div class="field" id="valCurRrField">
+              <label id="valCurRrLabel">Current RR (0–99)</label>
+              <input class="input" id="valCurrentRr" type="number" inputmode="numeric" min="0" max="99" placeholder="e.g. 50" />
+            </div>
+            <div class="field" id="valDesRrField">
+              <label id="valDesRrLabel">Desired RR (0–99)</label>
+              <input class="input" id="valDesiredRr" type="number" inputmode="numeric" min="0" max="99" value="0" placeholder="0" />
+            </div>
+          </div>
+
+          <div id="valRrFields" class="grid" style="margin-top:12px; display:none;">
+            <div class="field">
+              <label>Avg RR Gained per Win</label>
+              <input class="input" id="valRrWin" type="number" inputmode="numeric" min="1" max="100" placeholder="e.g. 20" />
+            </div>
+            <div class="field">
+              <label>Avg RR Lost per Loss</label>
+              <input class="input" id="valRrLoss" type="number" inputmode="numeric" min="1" max="100" placeholder="e.g. 20" />
+            </div>
+          </div>
+        </div>
+
+        <div id="r6Panel" class="game-panel">
+          <div class="seg" style="margin-bottom:12px;">
+            <div>
+              <div style="font-weight:950; font-size:13.5px;">Completion Method</div>
+              <div style="color:var(--muted); font-size:12px; margin-top:2px;">Solo = We play on your account | Duo = We play together</div>
+            </div>
+            <div class="toggle">
+              <div class="btn active" id="r6SoloBtn" tabindex="0">Solo</div>
+              <div class="btn" id="r6DuoBtn" tabindex="0">Duo</div>
+            </div>
+          </div>
+
+          <div class="grid">
+            <div class="field">
+              <label>Current Rank</label>
+              <select id="r6Current" class="native-hidden" aria-label="Current Rank"></select>
+              <div class="cs" data-for="r6Current" id="csR6Current">
+                <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                <span class="cs-caret" aria-hidden="true"></span>
+                <div class="cs-menu" role="listbox"></div>
+              </div>
+            </div>
+            <div class="field">
+              <label>Desired Rank</label>
+              <select id="r6Desired" class="native-hidden" aria-label="Desired Rank"></select>
+              <div class="cs" data-for="r6Desired" id="csR6Desired">
+                <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+                <span class="cs-caret" aria-hidden="true"></span>
+                <div class="cs-menu" role="listbox"></div>
+              </div>
+            </div>
+          </div>
+          <div class="grid" style="margin-top:12px;">
+            <div class="field">
+              <label>Current RP</label>
+              <input class="input" id="r6CurrentRp" type="number" inputmode="numeric" min="0" max="99" placeholder="e.g. 50" />
+            </div>
+            <div class="field">
+              <label>Avg RP Gained per Win</label>
+              <input class="input" id="r6RpWin" type="number" inputmode="numeric" min="1" max="200" placeholder="e.g. 30" />
+            </div>
+          </div>
+          <div class="field" id="r6RegionField" style="margin-top:12px; display:none;">
+            <label>Region (Duo Only)</label>
+            <select id="r6Region" class="native-hidden" aria-label="Region"></select>
+            <div class="cs" data-for="r6Region" id="csR6Region">
+              <button type="button" class="cs-btn" aria-haspopup="listbox" aria-expanded="false"></button>
+              <span class="cs-caret" aria-hidden="true"></span>
+              <div class="cs-menu" role="listbox"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="discord-cta">
+          <a href="https://discord.gg/7w2BWAHSma" target="_blank" class="discord-btn" id="joinDiscordBtn" style="display:inline-flex; align-items:center; justify-content:center; text-decoration:none; font-size:14px;"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 127.14 96.36'%3E%3Cpath fill='%23fff' d='M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0 105.89 105.89 0 0 0 19.39 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53.05s5-12.68 11.45-12.68S54 46.05 53.89 53.05s-5.05 12.64-11.44 12.64Zm42.24 0C78.41 65.69 73.25 60 73.25 53.05s5-12.68 11.44-12.68S96.23 46.05 96.12 53.05s-5 12.64-11.43 12.64Z'/%3E%3C/svg%3E" width="18" style="vertical-align:middle; margin-right:6px;" alt="Discord icon" />Join Discord</a>
+        </div>
+      </div>
+
+      <aside class="card checkout">
+        <div class="edge-glow" aria-hidden="true"></div>
+
+        <div class="checkout-title">Order Summary</div>
+
+        <div class="sum">
+          <div class="sum-row">
+            <div class="sum-left">Game</div>
+            <div class="sum-right" id="sumGame">Rocket League</div>
+          </div>
+
+          <div class="sum-row" id="sumServiceRow">
+            <div class="sum-left">Service</div>
+            <div class="sum-right" id="sumService">Boost</div>
+          </div>
+
+          <div class="sum-row" id="sumModeRow">
+            <div class="sum-left">Mode</div>
+            <div class="sum-right" id="sumMode">Solo</div>
+          </div>
+
+          <div class="sum-row" id="sumPlaylistRow">
+            <div class="sum-left" id="sumPlaylistLabel">Playlist</div>
+            <div class="sum-right" id="sumPlaylist">2v2</div>
+          </div>
+
+          <div class="sum-row" id="sumStartRow">
+            <div class="sum-left" id="sumStartLabel">Current</div>
+            <div class="sum-right" id="sumStart">-</div>
+          </div>
+
+          <div class="sum-row" id="sumEndRow">
+            <div class="sum-left" id="sumEndLabel">Desired</div>
+            <div class="sum-right" id="sumEnd">-</div>
+          </div>
+
+          <div class="sum-row" id="sumRewardsRow" style="display:none;">
+            <div class="sum-left">Rewards</div>
+            <div class="sum-right" id="sumRewards">Off</div>
+          </div>
+
+          <div class="sum-row" id="sumMmrRow" style="display:none;">
+            <div class="sum-left" id="sumMmrLabel">MMR</div>
+            <div class="sum-right" id="sumMmr">-</div>
+          </div>
+
+          <div class="sum-row" id="sumRegionRow" style="display:none;">
+            <div class="sum-left">Region</div>
+            <div class="sum-right" id="sumRegion">-</div>
+          </div>
+
+          <div class="total-wrap">
+            <div class="label">Total Price</div>
+            <div class="price" id="sumPrice">$0</div>
+          </div>
+
+          <div class="eta">
+            <div class="clock" aria-hidden="true"></div>
+            <div id="etaText">Estimated Time: -</div>
+          </div>
+        </div>
+
+        <div class="cta">
+          <button class="primary" id="checkoutBtn" disabled>Checkout</button>
+        </div>
+
+        <div class="status" id="statusBox">Choose your options to generate a quote.</div>
+      </aside>
+    </section>
+
+  </div>
+
+<script src="shared/nav.js"></script>
+<script>
+  const DISCORD_URL = "https://discord.gg/7w2BWAHSma";
+
+  const DUO_MULTIPLIER = 1.40;
+  const EU_DUO_TOTAL_MULTIPLIER = 1.40;
+
+  const PLAYLIST_MULTIPLIERS = {
+    "1v1": 1.25,
+    "2v2": 1.00,
+    "3v3": 1.00,
+    "rumble": 1.25,
+    "hoops": 1.25,
+    "snow day": 1.00,
+    "heatseeker": 1.25,
+  };
+
+  const SSL_MMR_PRICE_PER_10 = 2;
+  const DEFAULT_SSL_RULES = {
+    baseMmr: 1875,
+    currentMin: 1850,
+    targetMin: 1875,
+    maxMmr: 2100,
+  };
+  const SSL_RULES_BY_PLAYLIST = {
+    "2v2": { baseMmr: 1875, currentMin: 1850, targetMin: 1875, maxMmr: 2200 },
+    "3v3": { baseMmr: 1875, currentMin: 1850, targetMin: 1875, maxMmr: 2100 },
+    "snow day": { baseMmr: 1275, currentMin: 1275, targetMin: 1275, maxMmr: 1400 },
+  };
+  const SSL_REWARDS_FEE = 10;
+
+  const TOURNAMENT_PRICES = {
+    "bronze": 5,
+    "silver": 6,
+    "gold": 7,
+    "plat": 9,
+    "diamond": 11,
+    "champ": 13,
+    "grand champ": 15,
+    "ssl": 20,
+    "3x ssl tournament winner": 50,
+  };
+  const TOURNAMENT_LABELS = {
+    "bronze": "Bronze Tournament Winner",
+    "silver": "Silver Tournament Winner",
+    "gold": "Gold Tournament Winner",
+    "plat": "Platinum Tournament Winner",
+    "diamond": "Diamond Tournament Winner",
+    "champ": "Champion Tournament Winner",
+    "grand champ": "Grand Champion Tournament Winner",
+    "ssl": "Supersonic Legend Tournament Winner",
+    "3x ssl tournament winner": "3x SSL Tournament Winner",
+  };
+
+  const ranks = [
+    "Bronze I","Bronze II","Bronze III",
+    "Silver I","Silver II","Silver III",
+    "Gold I","Gold II","Gold III",
+    "Platinum I","Platinum II","Platinum III",
+    "Diamond I","Diamond II","Diamond III",
+    "Champion I","Champion II","Champion III",
+    "Grand Champion I","Grand Champion II","Grand Champion III",
+    "Supersonic Legend"
+  ];
+  const SSL_IDX = ranks.length - 1;
+  const GC2_IDX = ranks.indexOf("Grand Champion II");
+
+  const GC2_CAP_PLAYLISTS = new Set(["1v1", "rumble"]);
+  const DIAMOND1_CAP_PLAYLISTS = new Set(["hoops", "heatseeker"]);
+  const DIAMOND1_IDX = ranks.indexOf("Diamond I");
+
+  const ACCOUNTS = {
+    "stacked_ranked_ready": { title: "Stacked Ranked Ready Account", price: 50, delivery_hours: 24 },
+    "ranked_ready": { title: "Ranked Ready Account", price: 3, delivery_hours: 12 },
+    "s21_ssl_2v2_no_rewards": { title: "S21 SSL 2v2 No Rewards", price: 20, delivery_hours: 24 },
+    "s21_ssl_2v2_rewards": { title: "S21 SSL 2v2 + Rewards", price: 30, delivery_hours: 24 },
+    "s21_ssl_2v2_3v3_no_rewards": { title: "S21 SSL 2v2 + 3v3 No Rewards", price: 45, delivery_hours: 48 },
+    "s21_ssl_2v2_3v3_rewards": { title: "S21 SSL 2v2 + 3v3 + Rewards", price: 60, delivery_hours: 48 },
+    "s21_ssl_2v2_3v3_rewards_ssl_title": { title: "S21 SSL 2v2 + 3v3 + Rewards + SSL Title", price: 75, delivery_hours: 72 },
+    "s21_ssl_2v2_3v3_rewards_pink_ssl_title": { title: "S21 SSL 2v2 + 3v3 + Rewards + Pink SSL Title", price: 100, delivery_hours: 72 },
+  };
+
+  const CUSTOM_ACCOUNT_OPTIONS = {
+    "ssl_2v2": { title: "SSL in 2v2", price: 20 },
+    "ssl_3v3": { title: "SSL in 3v3", price: 30 },
+    "ssl_snowday": { title: "SSL in Snowday", price: 30 },
+    "ssl_rewards": { title: "SSL Rewards", price: 10 },
+    "gc2_1v1": { title: "GC2 in 1v1", price: 15 },
+    "gc2_rumble": { title: "GC2 in Rumble", price: 15 },
+    "d1_hoops": { title: "Diamond I in Hoops", price: 10 },
+    "d1_heatseeker": { title: "Diamond I in Heatseeker", price: 10 },
+    "ssl_title": { title: "SSL Title", price: 15 },
+    "pink_ssl_title": { title: "Pink SSL Title", price: 40 },
+  };
+
+  const TRANSITION_PRICES = [
+    1, 1, 1, 2,
+    2, 2, 3, 3,
+    3, 4, 4, 4,
+    5, 5, 5, 5,
+    5, 5, 10,
+    12, 18
+  ];
+
+  const FIRST_TIER_INDEX_BY_BASE = {
+    "bronze": 0,
+    "silver": 3,
+    "gold": 6,
+    "plat": 9,
+    "diamond": 12,
+    "champ": 15,
+    "grand champ": 18,
+  };
+
+  const BASE_RANKS = ["bronze", "silver", "gold", "plat", "diamond", "champ", "grand champ", "ssl"];
+  const SSL_ETA_BY_BASE = {
+    "grand champ": 1,
+    "champ": 2,
+    "diamond": 3,
+    "plat": 4,
+    "gold": 5,
+    "silver": 6,
+    "bronze": 7,
+    "ssl": 1,
+  };
+
+  // ===== FORTNITE DATA =====
+  const FN_RANKS = ["Bronze I","Bronze II","Bronze III","Silver I","Silver II","Silver III","Gold I","Gold II","Gold III","Platinum I","Platinum II","Platinum III","Diamond I","Diamond II","Diamond III","Elite","Champion","Unreal"];
+  const FN_PRICES = [1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,5];
+  const FN_FULL_ETA_DAYS = 5;
+
+  // ===== VALORANT DATA =====
+  const VAL_RANKS = ["Iron 1","Iron 2","Iron 3","Bronze 1","Bronze 2","Bronze 3","Silver 1","Silver 2","Silver 3","Gold 1","Gold 2","Gold 3","Platinum 1","Platinum 2","Platinum 3","Diamond 1","Diamond 2","Diamond 3","Ascendant 1","Ascendant 2","Ascendant 3","Immortal 1","Immortal 2","Immortal 3","Radiant"];
+  const VAL_PRICES = [2,3,3,3,4,4,5,5,6,6,6,7,7,7,8,8,8,8,15,16,19,20,30,150];
+  const VAL_IMM1_IDX = 21;
+  const VAL_IMM_ETA_DAYS = 14;
+  const VAL_FULL_ETA_DAYS = 30;
+
+  // ===== RAINBOW SIX SIEGE DATA =====
+  const R6_RANKS = ["Copper 5","Copper 4","Copper 3","Copper 2","Copper 1","Bronze 5","Bronze 4","Bronze 3","Bronze 2","Bronze 1","Silver 5","Silver 4","Silver 3","Silver 2","Silver 1","Gold 5","Gold 4","Gold 3","Gold 2","Gold 1","Platinum 5","Platinum 4","Platinum 3","Platinum 2","Platinum 1","Diamond 5","Diamond 4","Diamond 3","Diamond 2","Diamond 1","Champion"];
+  const R6_PRICES = [1,1,1,1,1,1,1,1,2,2,2,2,2,2,3,3,3,3,3,3,3,4,4,5,6,6,7,8,9,10];
+  const R6_FULL_ETA_DAYS = 14;
+  const R6_DIAMOND_IDX = 25;
+  const R6_RP_PER_DIV = 100;
+
+  function baseOfRankIndex(idx){
+    const name = ranks[idx] || "";
+    if (name.startsWith("Bronze")) return "bronze";
+    if (name.startsWith("Silver")) return "silver";
+    if (name.startsWith("Gold")) return "gold";
+    if (name.startsWith("Platinum")) return "plat";
+    if (name.startsWith("Diamond")) return "diamond";
+    if (name.startsWith("Champion") && !name.startsWith("Grand Champion")) return "champ";
+    if (name.startsWith("Grand Champion")) return "grand champ";
+    return "ssl";
+  }
+
+  function baseRankIndex(base){
+    return BASE_RANKS.indexOf(base);
+  }
+
+  function playlistIsGc2Capped(pl){
+    return GC2_CAP_PLAYLISTS.has((pl || "").toLowerCase());
+  }
+
+  function playlistIsDiamond1Capped(pl){
+    return DIAMOND1_CAP_PLAYLISTS.has((pl || "").toLowerCase());
+  }
+
+  function getMaxRankIdx(pl){
+    pl = (pl || "").toLowerCase();
+    if (DIAMOND1_CAP_PLAYLISTS.has(pl)) return DIAMOND1_IDX;
+    if (GC2_CAP_PLAYLISTS.has(pl)) return GC2_IDX;
+    return SSL_IDX;
+  }
+
+  function ceilInt(n){
+    return Math.ceil(n);
+  }
+
+  function calculateBasePrice(currentIdx, desiredIdx){
+    if (desiredIdx <= currentIdx) throw new Error("Desired rank must be higher than current rank.");
+    let total = 0;
+    for (let i = currentIdx; i < desiredIdx; i++){
+      total += (TRANSITION_PRICES[i] ?? 0);
+    }
+    return total;
+  }
+
+  function calculateSslToSslPrice(currentMmr, desiredMmr){
+    const delta = desiredMmr - currentMmr;
+    if (delta <= 0) throw new Error("Desired MMR must be higher than current MMR.");
+    const steps = Math.ceil(delta / 10);
+    return Math.max(1, steps * SSL_MMR_PRICE_PER_10);
+  }
+
+  function getSslRules(playlist){
+    const pl = (playlist || "").toLowerCase();
+    return SSL_RULES_BY_PLAYLIST[pl] || DEFAULT_SSL_RULES;
+  }
+
+  function calculateSslTargetExtraPrice(desiredMmr, baseMmr){
+    if (desiredMmr <= baseMmr) return 0;
+    const steps = Math.ceil((desiredMmr - baseMmr) / 10);
+    return Math.max(0, steps * SSL_MMR_PRICE_PER_10);
+  }
+
+  function getRewardsFeeForDesiredRank(desiredIdx){
+    const base = baseOfRankIndex(desiredIdx);
+    if (base === "ssl") return SSL_REWARDS_FEE;
+    const firstIdx = FIRST_TIER_INDEX_BY_BASE[base];
+    return TRANSITION_PRICES[firstIdx] ?? 0;
+  }
+
+  function rewardsAvailableForSelection(currentIdx, desiredIdx, pl){
+    if (["tournament", "custom"].includes((pl || "").toLowerCase())) return false;
+    if (!Number.isInteger(currentIdx) || !Number.isInteger(desiredIdx)) return false;
+    if (desiredIdx <= currentIdx) return false;
+    if (currentIdx === SSL_IDX && desiredIdx === SSL_IDX) return false;
+    return true;
+  }
+
+  function calculateFinalBoostPrice({ playlist, method, region, currentIdx, desiredIdx, currentMmr, desiredMmr, rewards }){
+    const pl = (playlist || "").toLowerCase();
+    const m  = (method || "solo").toLowerCase();
+    const sslRules = getSslRules(pl);
+
+    let basePrice = 0;
+    let extraFee = 0;
+
+    if (currentIdx === SSL_IDX && desiredIdx === SSL_IDX){
+      if (currentMmr == null || desiredMmr == null) throw new Error("MMR required for SSL to higher SSL boost.");
+      basePrice = calculateSslToSslPrice(currentMmr, desiredMmr);
+    } else if (desiredIdx === SSL_IDX && currentIdx !== SSL_IDX){
+      basePrice = calculateBasePrice(currentIdx, SSL_IDX);
+      basePrice += calculateSslTargetExtraPrice(desiredMmr ?? sslRules.baseMmr, sslRules.baseMmr);
+      if (rewards) extraFee = SSL_REWARDS_FEE;
+    } else {
+      basePrice = calculateBasePrice(currentIdx, desiredIdx);
+      if (rewards) extraFee = getRewardsFeeForDesiredRank(desiredIdx);
+    }
+
+    let price = Number(basePrice);
+    price *= (PLAYLIST_MULTIPLIERS[pl] ?? 1.0);
+
+    if (m === "duo"){
+      if ((region || "").toLowerCase().startsWith("na")){
+        price *= DUO_MULTIPLIER;
+      } else {
+        price *= EU_DUO_TOTAL_MULTIPLIER;
+      }
+    }
+
+    price += Number(extraFee);
+    return ceilInt(price);
+  }
+
+  function calculateTournamentPrice({ method, region, targetKey }){
+    const base = TOURNAMENT_PRICES[targetKey];
+    if (base == null) throw new Error("Invalid tournament target.");
+    let price = Number(base);
+
+    if ((method || "").toLowerCase() === "duo"){
+      const r = (region || "").toLowerCase();
+      if (r.startsWith("na")) price *= 1.6;
+      else price *= 1.6;
+    }
+
+    return ceilInt(price);
+  }
+
+  function estimateDaysForBoost(currentIdx, desiredIdx){
+    const curBase = baseOfRankIndex(currentIdx);
+    const desBase = baseOfRankIndex(desiredIdx);
+
+    if (desBase === "ssl"){
+      if (curBase === "ssl") return 1;
+      return SSL_ETA_BY_BASE[curBase] ?? 1;
+    }
+
+    const curMajor = baseRankIndex(curBase);
+    const desMajor = baseRankIndex(desBase);
+    return Math.max(1, desMajor - curMajor);
+  }
+
+  function formatEtaText({ tbd=false, days=null, hours=null }){
+    if (tbd) return "Estimated Time: TBD";
+    if (hours != null) return `Estimated Time: ${hours}h`;
+    if (days == null) return "Estimated Time: -";
+    return `Estimated Time: ${days} day${days === 1 ? "" : "s"}`;
+  }
+
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  let orderType = "BOOST";
+  let method = "Solo";
+  let rewardsEnabled = false;
+
+  const boostsBtn = document.getElementById("boostsBtn");
+  const accountsBtn = document.getElementById("accountsBtn");
+
+  const boostsPanel = document.getElementById("boostsPanel");
+  const accountsPanel = document.getElementById("accountsPanel");
+
+  const soloBtn = document.getElementById("soloBtn");
+  const duoBtn  = document.getElementById("duoBtn");
+  const rewardsToggleBtn = document.getElementById("rewardsToggleBtn");
+  const boostRewardsSeg = document.getElementById("boostRewardsSeg");
+
+  const regionField = document.getElementById("regionField");
+  const region = document.getElementById("region");
+
+  const playlist = document.getElementById("playlist");
+
+  const rankGrid = document.getElementById("rankGrid");
+  const rankCurrent = document.getElementById("rankCurrent");
+  const rankDesired = document.getElementById("rankDesired");
+
+  const sslTargetField = document.getElementById("sslTargetField");
+  const sslTargetMmr = document.getElementById("sslTargetMmr");
+
+  const sslBothField = document.getElementById("sslBothField");
+  const sslCurrentMmr = document.getElementById("sslCurrentMmr");
+  const sslDesiredMmr = document.getElementById("sslDesiredMmr");
+
+  const tournamentField = document.getElementById("tournamentField");
+  const tournamentTarget = document.getElementById("tournamentTarget");
+
+  const customField = document.getElementById("customField");
+  const customDetails = document.getElementById("customDetails");
+
+  const accountSelect = document.getElementById("accountSelect");
+  const customAccountField = document.getElementById("customAccountField");
+  const customAccountInputs = Array.from(document.querySelectorAll(".custom-account-option"));
+
+  const sumService = document.getElementById("sumService");
+  const sumModeRow = document.getElementById("sumModeRow");
+  const sumMode = document.getElementById("sumMode");
+  const sumPlaylistRow = document.getElementById("sumPlaylistRow");
+  const sumPlaylistLabel = document.getElementById("sumPlaylistLabel");
+  const sumPlaylist = document.getElementById("sumPlaylist");
+  const sumStartRow = document.getElementById("sumStartRow");
+  const sumEndRow = document.getElementById("sumEndRow");
+  const sumStartLabel = document.getElementById("sumStartLabel");
+  const sumEndLabel = document.getElementById("sumEndLabel");
+  const sumStart = document.getElementById("sumStart");
+  const sumEnd = document.getElementById("sumEnd");
+
+  const sumRewardsRow = document.getElementById("sumRewardsRow");
+  const sumRewards = document.getElementById("sumRewards");
+
+  const sumMmrRow = document.getElementById("sumMmrRow");
+  const sumMmrLabel = document.getElementById("sumMmrLabel");
+  const sumMmr = document.getElementById("sumMmr");
+
+  const sumRegionRow = document.getElementById("sumRegionRow");
+  const sumRegion = document.getElementById("sumRegion");
+
+  const sumPrice = document.getElementById("sumPrice");
+  const etaText = document.getElementById("etaText");
+
+  const statusBox = document.getElementById("statusBox");
+  const checkoutBtn = document.getElementById("checkoutBtn");
+  const joinDiscordBtn = document.getElementById("joinDiscordBtn");
+
+  let audioCtx = null;
+  function sfx(type="tap"){
+    try{
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const t = audioCtx.currentTime;
+
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+
+      const settings = {
+        tap:     { f0: 420, f1: 240, dur: 0.05, vol: 0.045 },
+        switch:  { f0: 520, f1: 300, dur: 0.06, vol: 0.055 },
+        success: { f0: 700, f1: 920, dur: 0.08, vol: 0.060 }
+      }[type] || { f0: 420, f1: 240, dur: 0.05, vol: 0.045 };
+
+      o.type = "sine";
+      o.frequency.setValueAtTime(settings.f0, t);
+      o.frequency.exponentialRampToValueAtTime(settings.f1, t + settings.dur);
+
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(settings.vol, t + 0.01);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + settings.dur);
+
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(t); o.stop(t + settings.dur + 0.02);
+    }catch(e){}
+  }
+
+  function closeAllCustomSelects(except=null){
+    document.querySelectorAll(".cs.open").forEach(cs => {
+      if (except && cs === except) return;
+      cs.classList.remove("open");
+      const b = cs.querySelector(".cs-btn");
+      if (b) b.setAttribute("aria-expanded","false");
+      const field = cs.closest(".field");
+      if (field) field.classList.remove("field-open");
+    });
+  }
+
+  function buildCustomSelect(csRoot){
+    const selectId = csRoot.getAttribute("data-for");
+    const native = document.getElementById(selectId);
+    const btn = csRoot.querySelector(".cs-btn");
+    const menu = csRoot.querySelector(".cs-menu");
+    const field = csRoot.closest(".field");
+
+    function close(){
+      csRoot.classList.remove("open");
+      btn.setAttribute("aria-expanded","false");
+      if (field) field.classList.remove("field-open");
+    }
+    function open(){
+      closeAllCustomSelects(csRoot);
+      if (field) field.classList.add("field-open");
+      csRoot.classList.add("open");
+      btn.setAttribute("aria-expanded","true");
+      const sel = menu.querySelector('[aria-selected="true"]');
+      if (sel) sel.scrollIntoView({ block: "nearest" });
+    }
+    function toggle(){
+      if (csRoot.classList.contains("open")) close(); else open();
+    }
+
+    function render(){
+      menu.innerHTML = "";
+      const opts = Array.from(native.options);
+      const currentVal = native.value;
+
+      const currentOpt = opts.find(o => o.value === currentVal);
+      btn.textContent = currentOpt ? currentOpt.textContent : "Select...";
+
+      opts.forEach(o => {
+        const item = document.createElement("div");
+        item.className = "cs-opt" + (o.disabled ? " disabled" : "");
+        item.setAttribute("role","option");
+        item.setAttribute("tabindex", o.disabled ? "-1" : "0");
+        item.dataset.value = o.value;
+        item.textContent = o.textContent;
+        item.setAttribute("aria-selected", o.value === currentVal ? "true" : "false");
+        item.setAttribute("aria-disabled", o.disabled ? "true" : "false");
+
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (o.disabled) return;
+          native.value = o.value;
+          native.dispatchEvent(new Event("change", { bubbles:true }));
+          close();
+        });
+
+        item.addEventListener("keydown", (e) => {
+          if (o.disabled) return;
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            item.click();
+          }
+        });
+
+        menu.appendChild(item);
+      });
+    }
+
+    btn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      sfx("tap");
+      toggle();
+    });
+
+    document.addEventListener("click", () => close());
+    menu.addEventListener("click", (e) => e.stopPropagation());
+
+    native.addEventListener("change", () => render());
+    render();
+
+    return { render, native };
+  }
+
+  function setSelectOptions(selectEl, options){
+    const prev = selectEl.value;
+    selectEl.innerHTML = "";
+    for (const o of options){
+      const opt = document.createElement("option");
+      opt.value = String(o.value);
+      opt.textContent = o.label;
+      opt.disabled = !!o.disabled;
+      selectEl.appendChild(opt);
+    }
+    const still = Array.from(selectEl.options).find(o => o.value === prev && !o.disabled);
+    if (still){
+      selectEl.value = prev;
+    } else {
+      const firstValid = Array.from(selectEl.options).find(o => !o.disabled);
+      if (firstValid) selectEl.value = firstValid.value;
+    }
+  }
+
+  function populateRegions(){
+    setSelectOptions(region, [
+      { value:"NA", label:"NA (North America)" },
+      { value:"EU", label:"EU (Europe)" },
+      { value:"OCE", label:"OCE (Oceania)" },
+      { value:"SAM", label:"SAM (South America)" },
+      { value:"ASC", label:"ASC (Asia)" },
+      { value:"ME", label:"ME (Middle East)" },
+      { value:"AFR", label:"AFR (Africa)" },
+    ]);
+  }
+
+  function populatePlaylist(){
+    setSelectOptions(playlist, [
+      { value:"1v1", label:"1v1" },
+      { value:"2v2", label:"2v2" },
+      { value:"3v3", label:"3v3" },
+      { value:"snow day", label:"Snow Day" },
+      { value:"rumble", label:"Rumble" },
+      { value:"heatseeker", label:"Heatseeker" },
+      { value:"hoops", label:"Hoops" },
+      { value:"tournament", label:"Tournament" },
+      { value:"custom", label:"Custom" },
+    ]);
+  }
+
+  function populateTournamentTargets(){
+    const keys = [
+      "bronze","silver","gold","plat","diamond","champ","grand champ","ssl","3x ssl tournament winner"
+    ];
+    setSelectOptions(tournamentTarget, keys.map(k => ({
+      value: k,
+      label: (TOURNAMENT_LABELS[k] ?? k)
+    })));
+  }
+
+  function populateAccounts(){
+    const opts = [
+      ...Object.entries(ACCOUNTS).map(([key, v]) => ({
+        value: key,
+        label: `${v.title} - $${v.price} - ${v.delivery_hours}h`
+      })),
+      { value: "custom_account", label: "Custom Account - Build Your Own" }
+    ];
+    setSelectOptions(accountSelect, opts);
+  }
+
+  function populateRankCurrent(){
+    const pl = (playlist.value || "").toLowerCase();
+    const maxIdx = getMaxRankIdx(pl);
+
+    const opts = [];
+    for (let i = 0; i <= maxIdx; i++){
+      opts.push({ value: i, label: ranks[i] });
+    }
+    setSelectOptions(rankCurrent, opts);
+
+    const curIdx = parseInt(rankCurrent.value, 10);
+    if (curIdx > maxIdx){
+      rankCurrent.value = String(maxIdx);
+    }
+  }
+
+  function populateRankDesired(){
+    const pl = (playlist.value || "").toLowerCase();
+    const maxIdx = getMaxRankIdx(pl);
+
+    const curIdx = parseInt(rankCurrent.value, 10);
+
+    const opts = [];
+
+    if (curIdx === SSL_IDX){
+      opts.push({ value: SSL_IDX, label: ranks[SSL_IDX] });
+    } else {
+      for (let i = 0; i <= maxIdx; i++){
+        const disabled = !(i > curIdx);
+        opts.push({ value: i, label: ranks[i], disabled });
+      }
+    }
+
+    setSelectOptions(rankDesired, opts);
+  }
+
+  populateRegions();
+  populatePlaylist();
+  populateTournamentTargets();
+  populateAccounts();
+
+  playlist.value = "2v2";
+  rankCurrent.value = "0";
+  rankDesired.value = "3";
+  region.value = "NA";
+  tournamentTarget.value = "ssl";
+  accountSelect.value = Object.keys(ACCOUNTS)[0];
+
+  populateRankCurrent();
+  populateRankDesired();
+  syncSslInputs();
+
+  const csRegion = buildCustomSelect(document.getElementById("csRegion"));
+  const csPlaylist = buildCustomSelect(document.getElementById("csPlaylist"));
+  const csRankCurrent = buildCustomSelect(document.getElementById("csRankCurrent"));
+  const csRankDesired = buildCustomSelect(document.getElementById("csRankDesired"));
+  const csTournamentTarget = buildCustomSelect(document.getElementById("csTournamentTarget"));
+  const csAccountSelect = buildCustomSelect(document.getElementById("csAccountSelect"));
+
+  function syncSslInputs(){
+    const rules = getSslRules(playlist.value);
+
+    sslTargetMmr.min = String(rules.targetMin);
+    sslTargetMmr.max = String(rules.maxMmr);
+    sslTargetMmr.placeholder = `Enter desired SSL MMR (${rules.targetMin}-${rules.maxMmr})`;
+
+    sslCurrentMmr.min = String(rules.currentMin);
+    sslCurrentMmr.max = String(rules.maxMmr);
+    sslCurrentMmr.placeholder = `${rules.currentMin}-${rules.maxMmr}`;
+
+    sslDesiredMmr.min = String(rules.targetMin);
+    sslDesiredMmr.max = String(rules.maxMmr);
+    sslDesiredMmr.placeholder = `${rules.targetMin}-${rules.maxMmr}`;
+  }
+
+  function setRewardsEnabled(next){
+    rewardsEnabled = !!next;
+    rewardsToggleBtn.classList.toggle("active", rewardsEnabled);
+    rewardsToggleBtn.setAttribute("aria-checked", String(rewardsEnabled));
+    rewardsToggleBtn.textContent = rewardsEnabled ? "\u2713 Rewards On" : "Rewards Off";
+    update();
+  }
+
+  function getSelectedCustomAccountOptions(){
+    return customAccountInputs
+      .filter(input => input.checked)
+      .map(input => CUSTOM_ACCOUNT_OPTIONS[input.value])
+      .filter(Boolean);
+  }
+
+  function setStatus(kind, text){
+    statusBox.className = "status " + kind;
+    statusBox.textContent = text;
+  }
+
+  function setOrderType(next){
+    orderType = next;
+    closeAllCustomSelects();
+    sfx("switch");
+
+    const isBoost = (orderType === "BOOST");
+    boostsBtn.classList.toggle("active", isBoost);
+    accountsBtn.classList.toggle("active", !isBoost);
+    boostsBtn.setAttribute("aria-selected", String(isBoost));
+    accountsBtn.setAttribute("aria-selected", String(!isBoost));
+
+    boostsPanel.style.display = isBoost ? "block" : "none";
+    accountsPanel.style.display = isBoost ? "none" : "block";
+
+    sumService.textContent = isBoost ? "Boost" : "Account";
+
+    updateVisibility();
+    update();
+  }
+
+  function setMethod(next){
+    method = next;
+    closeAllCustomSelects();
+    sfx("switch");
+
+    const isDuo = method === "Duo";
+    soloBtn.classList.toggle("active", !isDuo);
+    duoBtn.classList.toggle("active", isDuo);
+    soloBtn.setAttribute("aria-selected", String(!isDuo));
+    duoBtn.setAttribute("aria-selected", String(isDuo));
+
+    sumMode.textContent = isDuo ? "Duo" : "Solo";
+
+    updateVisibility();
+    update();
+  }
+
+
+  function updateVisibility(){
+    const isBoost = (orderType === "BOOST");
+    const isDuo = (method === "Duo");
+
+    syncSslInputs();
+
+    sumModeRow.style.display = isBoost ? "flex" : "none";
+
+    regionField.style.display = (isBoost && isDuo) ? "flex" : "none";
+    sumRegionRow.style.display = (isBoost && isDuo) ? "flex" : "none";
+
+    if (!isBoost){
+      sumPlaylistLabel.textContent = "Account";
+      sumPlaylistRow.style.display = "flex";
+      sumStartRow.style.display = "none";
+      sumEndRow.style.display = "none";
+      sumRewardsRow.style.display = "none";
+      sumMmrRow.style.display = "none";
+      tournamentField.style.display = "none";
+      customField.style.display = "none";
+      sslTargetField.style.display = "none";
+      sslBothField.style.display = "none";
+      rankGrid.style.display = "none";
+      boostRewardsSeg.style.display = "none";
+      customAccountField.style.display = accountSelect.value === "custom_account" ? "flex" : "none";
+      return;
+    }
+
+    customAccountField.style.display = "none";
+    sumPlaylistLabel.textContent = "Playlist";
+    sumPlaylistRow.style.display = "flex";
+
+    const pl = (playlist.value || "").toLowerCase();
+    const isTournament = pl === "tournament";
+    const isCustom = pl === "custom";
+
+    tournamentField.style.display = isTournament ? "flex" : "none";
+    customField.style.display = isCustom ? "flex" : "none";
+
+    rankGrid.style.display = (!isTournament && !isCustom) ? "grid" : "none";
+
+    const curIdx = parseInt(rankCurrent.value, 10);
+    const desIdx = parseInt(rankDesired.value, 10);
+
+    const showSslTarget = (!isTournament && !isCustom && desIdx === SSL_IDX && curIdx !== SSL_IDX);
+    const showSslBoth = (!isTournament && !isCustom && desIdx === SSL_IDX && curIdx === SSL_IDX);
+    const showRewards = (!isTournament && !isCustom && rewardsAvailableForSelection(curIdx, desIdx, pl));
+
+    sslTargetField.style.display = showSslTarget ? "flex" : "none";
+    sslBothField.style.display = showSslBoth ? "grid" : "none";
+    boostRewardsSeg.style.display = showRewards ? "flex" : "none";
+    sumRewardsRow.style.display = showRewards ? "flex" : "none";
+
+    sumStartRow.style.display = (!isTournament && !isCustom) ? "flex" : "none";
+    sumEndRow.style.display = "flex";
+
+    if (isTournament){
+      sumStartRow.style.display = "none";
+      sumEndLabel.textContent = "Tournament";
+    } else if (isCustom){
+      sumStartRow.style.display = "none";
+      sumEndLabel.textContent = "Custom";
+    } else {
+      sumStartLabel.textContent = "Current";
+      sumEndLabel.textContent = "Desired";
+    }
+  }
+
+  function getBoostQuote(){
+    const pl = (playlist.value || "").toLowerCase();
+    const isDuo = (method === "Duo");
+    const regionVal = region.value || "";
+
+    const plNames = {"snow day":"Snow Day","hoops":"Hoops","heatseeker":"Heatseeker","rumble":"Rumble"};
+    sumPlaylist.textContent = plNames[pl] || (playlist.value || "-");
+
+    if (isDuo){
+      sumRegion.textContent = regionVal;
+    }
+
+    if (pl === "tournament"){
+      sumRewardsRow.style.display = "none";
+      const targetKey = tournamentTarget.value;
+      const label = TOURNAMENT_LABELS[targetKey] ?? targetKey;
+      sumEnd.textContent = label;
+      sumMmrRow.style.display = "none";
+
+      const price = calculateTournamentPrice({
+        method: method.toLowerCase(),
+        region: regionVal,
+        targetKey
+      });
+
+      const days = isDuo ? 6 : 3;
+
+      return {
+        ok: true,
+        price,
+        eta: { days },
+        status: `Estimate ready: $${price} \u2022 Tournament \u2022 ${isDuo ? "Duo" : "Solo"}.`
+      };
+    }
+
+    if (pl === "custom"){
+      sumRewardsRow.style.display = "none";
+      const text = (customDetails.value || "").trim();
+      sumEnd.textContent = text ? "Custom request entered" : "-";
+      sumMmrRow.style.display = "none";
+
+      if (!text){
+        return {
+          ok: false,
+          priceText: "TBD",
+          eta: { tbd: true },
+          status: "Enter your custom request to continue."
+        };
+      }
+
+      return {
+        ok: true,
+        priceText: "TBD",
+        eta: { tbd: true },
+        status: "Custom request ready - pricing is quoted in Discord."
+      };
+    }
+
+    const curIdx = parseInt(rankCurrent.value, 10);
+    const desIdx = parseInt(rankDesired.value, 10);
+    const rewardsAllowed = rewardsAvailableForSelection(curIdx, desIdx, pl);
+    const rewards = rewardsAllowed && rewardsEnabled;
+
+    if (rewardsAllowed){
+      sumRewardsRow.style.display = "flex";
+      sumRewards.textContent = rewards ? `On (+$${getRewardsFeeForDesiredRank(desIdx)})` : "Off";
+    } else {
+      sumRewardsRow.style.display = "none";
+    }
+
+    const maxIdx = getMaxRankIdx(pl);
+
+    if (curIdx > maxIdx || desIdx > maxIdx){
+      const capName = playlistIsDiamond1Capped(pl) ? "Diamond I" : "Grand Champion II";
+      return {
+        ok: false,
+        price: 0,
+        eta: { days: null },
+        status: `This playlist is capped at ${capName}.`
+      };
+    }
+
+    if (curIdx === SSL_IDX && desIdx === SSL_IDX){
+      const sslRules = getSslRules(pl);
+      const c = Number(sslCurrentMmr.value);
+      const d = Number(sslDesiredMmr.value);
+
+      sumStart.textContent = ranks[curIdx];
+      sumEnd.textContent = ranks[desIdx];
+      sumMmrRow.style.display = "flex";
+      sumMmrLabel.textContent = "MMR";
+      sumMmr.textContent = `Current: ${sslCurrentMmr.value || "-"} | Desired: ${sslDesiredMmr.value || "-"}`;
+
+      if (!Number.isFinite(c) || !Number.isFinite(d)){
+        return { ok:false, price:0, eta:{days:null}, status:`Enter your current and desired SSL MMR.` };
+      }
+      if (c < sslRules.currentMin || c > sslRules.maxMmr){
+        return { ok:false, price:0, eta:{days:null}, status:`Current MMR must be between ${sslRules.currentMin} and ${sslRules.maxMmr}.` };
+      }
+      if (d < sslRules.targetMin || d > sslRules.maxMmr){
+        return { ok:false, price:0, eta:{days:null}, status:`Desired MMR must be between ${sslRules.targetMin} and ${sslRules.maxMmr}.` };
+      }
+      if (d <= c){
+        return { ok:false, price:0, eta:{days:null}, status:`Desired MMR must be higher than current MMR.` };
+      }
+
+      const price = calculateFinalBoostPrice({
+        playlist: pl,
+        method: method.toLowerCase(),
+        region: regionVal,
+        currentIdx: curIdx,
+        desiredIdx: desIdx,
+        currentMmr: c,
+        desiredMmr: d,
+        rewards: false
+      });
+
+      let days = estimateDaysForBoost(curIdx, desIdx);
+      if (isDuo) days *= 2;
+
+      return {
+        ok:true,
+        price,
+        eta:{ days },
+        status:`Estimate ready: $${price} \u2022 ${sumPlaylist.textContent} \u2022 ${isDuo ? "Duo" : "Solo"}.`
+      };
+    }
+
+    if (desIdx === SSL_IDX && curIdx !== SSL_IDX){
+      const sslRules = getSslRules(pl);
+      sumStart.textContent = ranks[curIdx];
+      sumEnd.textContent = rewards ? `${ranks[desIdx]} + Rewards` : ranks[desIdx];
+
+      let desiredMmr = sslRules.baseMmr;
+      if ((sslTargetMmr.value || "").trim() !== ""){
+        const d = Number(sslTargetMmr.value);
+        sumMmrRow.style.display = "flex";
+        sumMmrLabel.textContent = "Target SSL MMR";
+        sumMmr.textContent = sslTargetMmr.value;
+
+        if (!Number.isFinite(d)){
+          return { ok:false, price:0, eta:{days:null}, status:`Enter a valid target SSL MMR (${sslRules.targetMin}-${sslRules.maxMmr}) or leave it blank for base SSL.` };
+        }
+        if (d < sslRules.targetMin || d > sslRules.maxMmr){
+          return { ok:false, price:0, eta:{days:null}, status:`Target SSL MMR must be between ${sslRules.targetMin} and ${sslRules.maxMmr}.` };
+        }
+        desiredMmr = d;
+      } else {
+        sumMmrRow.style.display = "flex";
+        sumMmrLabel.textContent = "Target SSL MMR";
+        sumMmr.textContent = `${sslRules.baseMmr} (Base SSL)`;
+      }
+
+      const price = calculateFinalBoostPrice({
+        playlist: pl,
+        method: method.toLowerCase(),
+        region: regionVal,
+        currentIdx: curIdx,
+        desiredIdx: desIdx,
+        currentMmr: null,
+        desiredMmr,
+        rewards
+      });
+
+      let days = estimateDaysForBoost(curIdx, desIdx);
+      if (isDuo) days *= 2;
+
+      return {
+        ok:true,
+        price,
+        eta:{ days },
+        status:`Estimate ready: $${price} \u2022 ${sumPlaylist.textContent} \u2022 ${isDuo ? "Duo" : "Solo"}${rewards ? " \u2022 Rewards" : ""}.`
+      };
+    }
+
+    sumMmrRow.style.display = "none";
+    sumStart.textContent = ranks[curIdx];
+    sumEnd.textContent = rewards ? `${ranks[desIdx]} + Rewards` : ranks[desIdx];
+
+    if (desIdx <= curIdx){
+      return {
+        ok:false,
+        price:0,
+        eta:{days:null},
+        status:"Desired rank must be higher than current rank."
+      };
+    }
+
+    if (maxIdx < SSL_IDX && curIdx === maxIdx){
+      const capName = playlistIsDiamond1Capped(pl) ? "Diamond I" : "Grand Champion II";
+      return {
+        ok:false,
+        price:0,
+        eta:{days:null},
+        status:`For this playlist, the max rank is ${capName}.`
+      };
+    }
+
+    const price = calculateFinalBoostPrice({
+      playlist: pl,
+      method: method.toLowerCase(),
+      region: regionVal,
+      currentIdx: curIdx,
+      desiredIdx: desIdx,
+      currentMmr: null,
+      desiredMmr: null,
+      rewards
+    });
+
+    let days = estimateDaysForBoost(curIdx, desIdx);
+    if (isDuo) days *= 2;
+
+    return {
+      ok:true,
+      price,
+      eta:{ days },
+      status:`Estimate ready: $${price} \u2022 ${sumPlaylist.textContent} \u2022 ${isDuo ? "Duo" : "Solo"}${rewards ? " \u2022 Rewards" : ""}.`
+    };
+  }
+
+  function getAccountQuote(){
+    const key = accountSelect.value;
+
+    if (key === "custom_account"){
+      const selected = getSelectedCustomAccountOptions();
+      sumPlaylistLabel.textContent = "Account";
+      sumPlaylist.textContent = "Custom Account";
+
+      if (!selected.length){
+        return { ok:false, price:0, eta:{tbd:true}, status:"Select at least one custom account option." };
+      }
+
+      const price = selected.reduce((total, item) => total + Number(item.price || 0), 0);
+
+      return {
+        ok:true,
+        price,
+        eta:{ tbd:true },
+        status:`Custom account ready: $${price}. Final delivery time is confirmed in Discord.`
+      };
+    }
+
+    const acc = ACCOUNTS[key];
+    if (!acc){
+      return { ok:false, price:0, eta:{hours:null}, status:"Select an account." };
+    }
+
+    sumPlaylistLabel.textContent = "Account";
+    sumPlaylist.textContent = acc.title;
+
+    const price = acc.price;
+    const hours = acc.delivery_hours;
+
+    return {
+      ok:true,
+      price,
+      eta:{ hours },
+      status:`Account ready: $${price} \u2022 Delivery ${hours}h. Images available in Discord.`
+    };
+  }
+
+  function update(){
+    updateVisibility();
+
+    if (orderType === "BOOST"){
+      sumService.textContent = "Boost";
+      sumMode.textContent = (method === "Duo") ? "Duo" : "Solo";
+    } else {
+      sumService.textContent = "Account";
+    }
+
+    let res;
+    try{
+      if (orderType === "BOOST"){
+        res = getBoostQuote();
+      } else {
+        res = getAccountQuote();
+      }
+    } catch (e){
+      res = { ok:false, price:0, eta:{days:null}, status:(e && e.message) ? e.message : "Error calculating quote." };
+    }
+
+    if (orderType !== "BOOST"){
+      sumMmrRow.style.display = "none";
+      sumRewardsRow.style.display = "none";
+    }
+
+    if (!res.ok){
+      if (res.priceText){
+        sumPrice.textContent = res.priceText;
+      } else {
+        sumPrice.textContent = "$0";
+      }
+      etaText.textContent = formatEtaText({ tbd: !!(res.eta && res.eta.tbd), days: (res.eta && res.eta.days) ?? null, hours: (res.eta && res.eta.hours) ?? null });
+      checkoutBtn.disabled = true;
+      setStatus("bad", res.status || "Fix the selections above.");
+      return;
+    }
+
+    if (res.priceText){
+      sumPrice.textContent = res.priceText;
+    } else {
+      sumPrice.textContent = "$" + Number(res.price).toLocaleString();
+    }
+    etaText.textContent = formatEtaText({ tbd: !!(res.eta && res.eta.tbd), days: (res.eta && res.eta.days) ?? null, hours: (res.eta && res.eta.hours) ?? null });
+
+    checkoutBtn.disabled = false;
+    setStatus("ok", res.status || "Estimate ready.");
+  }
+
+  boostsBtn.addEventListener("click", () => setOrderType("BOOST"));
+  accountsBtn.addEventListener("click", () => setOrderType("ACCOUNT"));
+
+  soloBtn.addEventListener("click", () => setMethod("Solo"));
+  duoBtn.addEventListener("click", () => setMethod("Duo"));
+
+  rewardsToggleBtn.addEventListener("click", () => {
+    sfx("tap");
+    setRewardsEnabled(!rewardsEnabled);
+  });
+  rewardsToggleBtn.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      sfx("tap");
+      setRewardsEnabled(!rewardsEnabled);
+    }
+  });
+
+  playlist.addEventListener("change", () => {
+    sfx("tap");
+    populateRankCurrent();
+    populateRankDesired();
+    csRankCurrent.render();
+    csRankDesired.render();
+    csPlaylist.render();
+    updateVisibility();
+    update();
+  });
+
+  rankCurrent.addEventListener("change", () => {
+    sfx("tap");
+    populateRankDesired();
+    csRankDesired.render();
+    csRankCurrent.render();
+    updateVisibility();
+    update();
+  });
+
+  rankDesired.addEventListener("change", () => {
+    sfx("tap");
+    csRankDesired.render();
+    updateVisibility();
+    update();
+  });
+
+  region.addEventListener("change", () => { sfx("tap"); csRegion.render(); update(); });
+
+  tournamentTarget.addEventListener("change", () => { sfx("tap"); csTournamentTarget.render(); update(); });
+
+  sslTargetMmr.addEventListener("input", () => update());
+  sslCurrentMmr.addEventListener("input", () => update());
+  sslDesiredMmr.addEventListener("input", () => update());
+
+  customDetails.addEventListener("input", () => update());
+
+  accountSelect.addEventListener("change", () => { sfx("tap"); csAccountSelect.render(); updateVisibility(); update(); });
+
+  function enforceCustomAccountDeps(changedInput){
+    const ssl2v2 = document.querySelector('.custom-account-option[value="ssl_2v2"]');
+    const ssl3v3 = document.querySelector('.custom-account-option[value="ssl_3v3"]');
+    const sslRewards = document.querySelector('.custom-account-option[value="ssl_rewards"]');
+    const sslTitle = document.querySelector('.custom-account-option[value="ssl_title"]');
+    const pinkSslTitle = document.querySelector('.custom-account-option[value="pink_ssl_title"]');
+
+    // SSL Rewards requires at least one SSL playlist
+    if (sslRewards) {
+      const hasSsl = (ssl2v2 && ssl2v2.checked) || (ssl3v3 && ssl3v3.checked);
+      if (!hasSsl){
+        sslRewards.checked = false;
+        sslRewards.disabled = true;
+        sslRewards.closest('.check-pill')?.style && (sslRewards.closest('.check-item').style.opacity = '0.4');
+      } else {
+        sslRewards.disabled = false;
+        sslRewards.closest('.check-pill')?.style && (sslRewards.closest('.check-item').style.opacity = '1');
+      }
+    }
+
+    // SSL Title and Pink SSL Title are mutually exclusive
+    // Pink SSL Title includes normal SSL Title, so only one can be selected
+    if (sslTitle && pinkSslTitle) {
+      if (changedInput && changedInput.value === "pink_ssl_title" && pinkSslTitle.checked) {
+        sslTitle.checked = false;
+      } else if (changedInput && changedInput.value === "ssl_title" && sslTitle.checked) {
+        pinkSslTitle.checked = false;
+      }
+    }
+  }
+
+  customAccountInputs.forEach(input => {
+    input.addEventListener("change", () => {
+      sfx("tap");
+      enforceCustomAccountDeps(input);
+      update();
+    });
+  });
+
+  enforceCustomAccountDeps();
+
+  checkoutBtn.addEventListener("click", () => {
+    sfx("success");
+    window.location.href = DISCORD_URL;
+  });
+
+  if (joinDiscordBtn) {
+    joinDiscordBtn.addEventListener("click", () => {
+      sfx("success");
+    });
+  }
+
+  setOrderType("BOOST");
+  setMethod("Solo");
+  setRewardsEnabled(false);
+  csRegion.render();
+  csPlaylist.render();
+  csRankCurrent.render();
+  csRankDesired.render();
+  csTournamentTarget.render();
+  csAccountSelect.render();
+  update();
+
+  // ===== MULTI-GAME SYSTEM =====
+  let activeGame = 'rl';
+  const sumGame = document.getElementById('sumGame');
+  const sumServiceRow = document.getElementById('sumServiceRow');
+  const calcSubtitle = document.getElementById('calcSubtitle');
+
+  // --- Fortnite elements ---
+  const fnCurrentEl = document.getElementById('fnCurrent');
+  const fnDesiredEl = document.getElementById('fnDesired');
+  const fnCompletionFieldEl = document.getElementById('fnCompletionField');
+  const fnCompletionEl = document.getElementById('fnCompletion');
+  const fnRankBtn = document.getElementById('fnRankBtn');
+  const fnPrBtn = document.getElementById('fnPrBtn');
+  const fnRankPanel = document.getElementById('fnRankPanel');
+  const fnPrPanel = document.getElementById('fnPrPanel');
+  const fnPrPointsEl = document.getElementById('fnPrPoints');
+  const fnSoloBtn = document.getElementById('fnSoloBtn');
+  const fnDuoBtn = document.getElementById('fnDuoBtn');
+  const fnRegSel = document.getElementById('fnRegion');
+  let fnServiceType = 'rank';
+  let fnMethod = 'Solo';
+
+  // --- Valorant elements ---
+  const valCurrentEl = document.getElementById('valCurrent');
+  const valDesiredEl = document.getElementById('valDesired');
+  const valRegSel = document.getElementById('valRegion');
+  const valCurrentRrEl = document.getElementById('valCurrentRr');
+  const valDesiredRrEl = document.getElementById('valDesiredRr');
+  const valRrWinEl = document.getElementById('valRrWin');
+  const valRrLossEl = document.getElementById('valRrLoss');
+  const valSoloBtn = document.getElementById('valSoloBtn');
+  const valDuoBtn = document.getElementById('valDuoBtn');
+  let valMethod = 'Solo';
+
+  // --- R6 elements ---
+  const r6CurrentEl = document.getElementById('r6Current');
+  const r6DesiredEl = document.getElementById('r6Desired');
+  const r6CurrentRpEl = document.getElementById('r6CurrentRp');
+  const r6RpWinEl = document.getElementById('r6RpWin');
+  const r6RegSel = document.getElementById('r6Region');
+  const r6SoloBtn = document.getElementById('r6SoloBtn');
+  const r6DuoBtn = document.getElementById('r6DuoBtn');
+  let r6Method = 'Solo';
+
+  // --- Populate functions ---
+  function populateFnRanks(){
+    setSelectOptions(fnCurrentEl, FN_RANKS.slice(0,-1).map((r,i)=>({value:i,label:r})));
+    populateFnDesired();
+  }
+  function populateFnDesired(){
+    const c = parseInt(fnCurrentEl.value,10);
+    setSelectOptions(fnDesiredEl, FN_RANKS.map((r,i)=>({value:i,label:r,disabled:i<=c})));
+  }
+  function populateFnModes(){
+    setSelectOptions(document.getElementById('fnMode'),[
+      {value:'br',label:'Battle Royale'},{value:'zb',label:'Zero Build'},
+      {value:'reload',label:'Reload'},{value:'reload_zb',label:'Reload Zero Build'}
+    ]);
+  }
+  function populateFnRegions(){
+    setSelectOptions(fnRegSel,[{value:'NA',label:'NA (North America)'},{value:'EU',label:'EU (Europe)'},{value:'OCE',label:'OCE (Oceania)'},{value:'BR',label:'BR (Brazil)'},{value:'ASIA',label:'ASIA (Asia)'},{value:'ME',label:'ME (Middle East)'}]);
+  }
+  function valRrRange(rankIdx){
+    if(rankIdx>=24) return null; // Radiant
+    if(rankIdx===23) return {min:200,max:299};
+    if(rankIdx===22) return {min:100,max:199};
+    return {min:0,max:99};
+  }
+  function valClampRr(el, rankIdx){
+    const range = valRrRange(rankIdx);
+    if(!range){ el.value=''; return 0; }
+    let v = parseInt(el.value,10);
+    if(isNaN(v)) return 0;
+    if(v<range.min){ v=range.min; el.value=v; }
+    if(v>range.max){ v=range.max; el.value=v; }
+    return v;
+  }
+  function populateValRanks(){
+    setSelectOptions(valCurrentEl, VAL_RANKS.slice(0,-1).map((r,i)=>({value:i,label:r})));
+    populateValDesired();
+    valDesiredEl.value = '2'; // Default to Iron 2
+    setSelectOptions(valRegSel,[{value:'NA',label:'NA (North America)'},{value:'EU',label:'EU (Europe)'},{value:'OCE',label:'OCE (Oceania)'},{value:'LATAM',label:'LATAM (Latin America)'},{value:'APAC',label:'APAC (Asia Pacific)'},{value:'KR',label:'KR (Korea)'},{value:'BR',label:'BR (Brazil)'}]);
+  }
+  function populateValDesired(){
+    const c = parseInt(valCurrentEl.value,10);
+    // Allow same rank (for RR-only boosts)
+    setSelectOptions(valDesiredEl, VAL_RANKS.map((r,i)=>({value:i,label:r,disabled:i<c})));
+  }
+  function populateR6Ranks(){
+    setSelectOptions(r6CurrentEl, R6_RANKS.slice(0,-1).map((r,i)=>({value:i,label:r})));
+    populateR6Desired();
+    setSelectOptions(r6RegSel,[{value:'NA',label:'NA (North America)'},{value:'EU',label:'EU (Europe)'},{value:'LATAM',label:'LATAM (Latin America)'},{value:'APAC',label:'APAC (Asia Pacific)'}]);
+  }
+  function populateR6Desired(){
+    const c = parseInt(r6CurrentEl.value,10);
+    setSelectOptions(r6DesiredEl, R6_RANKS.map((r,i)=>({value:i,label:r,disabled:i<=c})));
+  }
+
+  populateFnRanks();
+  populateFnModes();
+  populateFnRegions();
+  populateValRanks();
+  populateR6Ranks();
+
+  const csFnCur = buildCustomSelect(document.getElementById('csFnCurrent'));
+  const csFnDes = buildCustomSelect(document.getElementById('csFnDesired'));
+  const csFnMode = buildCustomSelect(document.getElementById('csFnMode'));
+  const csFnReg = buildCustomSelect(document.getElementById('csFnRegion'));
+  const csValCur = buildCustomSelect(document.getElementById('csValCurrent'));
+  const csValDes = buildCustomSelect(document.getElementById('csValDesired'));
+  const csValReg = buildCustomSelect(document.getElementById('csValRegion'));
+  const csR6Cur = buildCustomSelect(document.getElementById('csR6Current'));
+  const csR6Des = buildCustomSelect(document.getElementById('csR6Desired'));
+  const csR6Reg = buildCustomSelect(document.getElementById('csR6Region'));
+
+  // --- Fortnite service type toggle ---
+  function setFnService(type){
+    fnServiceType = type;
+    sfx('switch');
+    fnRankBtn.classList.toggle('active', type === 'rank');
+    fnPrBtn.classList.toggle('active', type === 'pr');
+    fnRankPanel.style.display = type === 'rank' ? 'block' : 'none';
+    fnPrPanel.style.display = type === 'pr' ? 'block' : 'none';
+    masterUpdate();
+  }
+  fnRankBtn.addEventListener('click', () => setFnService('rank'));
+  fnPrBtn.addEventListener('click', () => setFnService('pr'));
+
+  // --- Fortnite solo/duo toggle ---
+  function setFnMethod(m){
+    fnMethod = m; sfx('switch');
+    fnSoloBtn.classList.toggle('active', m === 'Solo');
+    fnDuoBtn.classList.toggle('active', m === 'Duo');
+    document.getElementById('fnRegionField').style.display = (m === 'Duo') ? 'flex' : 'none';
+    masterUpdate();
+  }
+  fnSoloBtn.addEventListener('click', () => setFnMethod('Solo'));
+  fnDuoBtn.addEventListener('click', () => setFnMethod('Duo'));
+
+  // --- Valorant solo/duo toggle ---
+  function setValMethod(m){
+    valMethod = m; sfx('switch');
+    valSoloBtn.classList.toggle('active', m === 'Solo');
+    valDuoBtn.classList.toggle('active', m === 'Duo');
+    masterUpdate();
+  }
+  valSoloBtn.addEventListener('click', () => setValMethod('Solo'));
+  valDuoBtn.addEventListener('click', () => setValMethod('Duo'));
+
+  // --- R6 solo/duo toggle ---
+  function setR6Method(m){
+    r6Method = m; sfx('switch');
+    r6SoloBtn.classList.toggle('active', m === 'Solo');
+    r6DuoBtn.classList.toggle('active', m === 'Duo');
+    document.getElementById('r6RegionField').style.display = (m === 'Duo') ? 'flex' : 'none';
+    masterUpdate();
+  }
+  r6SoloBtn.addEventListener('click', () => setR6Method('Solo'));
+  r6DuoBtn.addEventListener('click', () => setR6Method('Duo'));
+
+  // --- Fortnite calculator ---
+  function updateFortnite(){
+    calcSubtitle.textContent = '#1 Fortnite Boosting Service';
+    sumGame.textContent = 'Fortnite';
+    sumRewardsRow.style.display = 'none';
+    sumPlaylistRow.style.display = 'none';
+
+    if (fnServiceType === 'pr') {
+      // PR Boosting
+      sumServiceRow.style.display = 'flex';
+      sumService.textContent = 'PR Boosting';
+      sumModeRow.style.display = 'flex';
+      sumMode.textContent = 'Solo';
+      sumRegionRow.style.display = 'none';
+      sumMmrRow.style.display = 'none';
+      sumStartRow.style.display = 'none';
+      sumEndRow.style.display = 'flex';
+      sumEndLabel.textContent = 'PR Points';
+
+      let pts = parseInt(fnPrPointsEl.value, 10);
+      if (isNaN(pts) || pts < 1) {
+        sumEnd.textContent = '-';
+        sumPrice.textContent = '$0';
+        etaText.textContent = formatEtaText({ tbd: true });
+        checkoutBtn.disabled = true;
+        setStatus('bad', 'Enter the number of PR points desired.');
+        return;
+      }
+      sumEnd.textContent = pts + ' PR';
+      pts = Math.ceil(pts / 10) * 10; // round up to nearest 10
+      const price = Math.max(1, Math.round(pts * 0.10));
+      const days = Math.max(1, Math.ceil(pts / 20));
+      sumPrice.textContent = '$' + price;
+      etaText.textContent = formatEtaText({ days });
+      checkoutBtn.disabled = false;
+      setStatus('ok', 'Estimate ready: $' + price + ' \u2022 Fortnite PR boost.');
+      return;
+    }
+
+    // Rank Boosting
+    const fnIsDuo = fnMethod === 'Duo';
+    sumServiceRow.style.display = 'flex';
+    sumService.textContent = 'Rank Boosting';
+    sumModeRow.style.display = 'flex';
+    sumMode.textContent = fnMethod;
+    sumMmrRow.style.display = 'none';
+    sumRegionRow.style.display = fnIsDuo ? 'flex' : 'none';
+    sumRegion.textContent = fnRegSel.value || '-';
+    sumStartRow.style.display = 'flex';
+    sumEndRow.style.display = 'flex';
+    sumStartLabel.textContent = 'Current';
+    sumEndLabel.textContent = 'Desired';
+
+    const ci = parseInt(fnCurrentEl.value, 10);
+    const di = parseInt(fnDesiredEl.value, 10);
+    sumStart.textContent = FN_RANKS[ci] || '-';
+    sumEnd.textContent = FN_RANKS[di] || '-';
+
+    const curName = FN_RANKS[ci] || '';
+    const showComp = (curName === 'Elite' || curName === 'Champion');
+    fnCompletionFieldEl.style.display = showComp ? 'flex' : 'none';
+
+    if (isNaN(di) || di <= ci) {
+      sumPrice.textContent = '$0';
+      etaText.textContent = formatEtaText({});
+      checkoutBtn.disabled = true;
+      setStatus('bad', 'Desired rank must be higher than current rank.');
+      return;
+    }
+
+    let price = 0;
+    for (let i = ci; i < di; i++) price += FN_PRICES[i];
+
+    if (showComp) {
+      const pct = Math.min(99, Math.max(0, parseInt(fnCompletionEl.value, 10) || 0));
+      if (pct > 0) price -= FN_PRICES[ci] * (pct / 100);
+    }
+
+    // Additive multipliers: base * (1 + duo_bonus + region_bonus)
+    const fnIsNonNA = fnIsDuo && (fnRegSel.value || 'NA') !== 'NA';
+    let fnMult = 1;
+    if (fnIsDuo) fnMult += 0.5;
+    if (fnIsNonNA) fnMult += 0.5;
+    price *= fnMult;
+
+    price = Math.max(1, Math.ceil(price));
+
+    let effSteps = di - ci;
+    if (showComp) {
+      const pct = Math.min(99, Math.max(0, parseInt(fnCompletionEl.value, 10) || 0));
+      effSteps -= pct / 100;
+    }
+    let days = Math.max(1, Math.ceil(FN_FULL_ETA_DAYS * effSteps / (FN_RANKS.length - 1)));
+    if (fnIsDuo) days = Math.max(1, Math.ceil(days * 2));
+
+    sumPrice.textContent = '$' + price;
+    etaText.textContent = formatEtaText({ days });
+    checkoutBtn.disabled = false;
+    setStatus('ok', 'Estimate ready: $' + price + ' \u2022 Fortnite ' + fnMethod + ' boost.');
+  }
+
+  // --- Valorant calculator ---
+  function updateValorant(){
+    calcSubtitle.textContent = '#1 Valorant Boosting Service';
+    sumGame.textContent = 'Valorant';
+    sumServiceRow.style.display = 'none';
+    sumPlaylistRow.style.display = 'none';
+    sumRewardsRow.style.display = 'none';
+    sumModeRow.style.display = 'flex';
+    sumMode.textContent = valMethod;
+    sumRegionRow.style.display = 'flex';
+    sumRegion.textContent = valRegSel.value || '-';
+    sumStartRow.style.display = 'flex';
+    sumEndRow.style.display = 'flex';
+    sumStartLabel.textContent = 'Current';
+    sumEndLabel.textContent = 'Desired';
+
+    const ci = parseInt(valCurrentEl.value, 10);
+    const di = parseInt(valDesiredEl.value, 10);
+
+    // Update RR field labels and ranges based on rank
+    const curRange = valRrRange(ci);
+    const desRange = valRrRange(di);
+    const curRrLabel = document.getElementById('valCurRrLabel');
+    const desRrLabel = document.getElementById('valDesRrLabel');
+    const desRrField = document.getElementById('valDesRrField');
+
+    if (curRange) {
+      curRrLabel.textContent = 'Current RR (' + curRange.min + '–' + curRange.max + ')';
+      valCurrentRrEl.min = curRange.min;
+      valCurrentRrEl.max = curRange.max;
+      valCurrentRrEl.placeholder = 'e.g. ' + (curRange.min + 50);
+    }
+    if (desRange) {
+      desRrLabel.textContent = 'Desired RR (' + desRange.min + '–' + desRange.max + ')';
+      valDesiredRrEl.min = desRange.min;
+      valDesiredRrEl.max = desRange.max;
+      valDesiredRrEl.placeholder = String(desRange.min);
+    }
+    // Hide desired RR for Radiant
+    if (desRrField) desRrField.style.display = desRange ? '' : 'none';
+
+    // Clamp RR values
+    valClampRr(valCurrentRrEl, ci);
+    valClampRr(valDesiredRrEl, di);
+
+    const rawCurRr = parseInt(valCurrentRrEl.value, 10);
+    const rawDesRr = parseInt(valDesiredRrEl.value, 10);
+    // Normalize RR to 0-99 within rank for price calc
+    const curRr = curRange ? Math.max(0, Math.min(99, (isNaN(rawCurRr) ? 0 : rawCurRr) - curRange.min)) : 0;
+    const desRr = desRange ? Math.max(0, Math.min(99, (isNaN(rawDesRr) ? 0 : rawDesRr) - desRange.min)) : 0;
+
+    // Show RR win/loss fields only when current rank is Immortal+
+    const valRrFields = document.getElementById('valRrFields');
+    if (valRrFields) valRrFields.style.display = (ci >= VAL_IMM1_IDX) ? 'grid' : 'none';
+
+    const displayCurRr = isNaN(rawCurRr) ? 0 : rawCurRr;
+    const displayDesRr = isNaN(rawDesRr) ? 0 : rawDesRr;
+    sumStart.textContent = (VAL_RANKS[ci] || '-') + (displayCurRr > 0 ? ' (' + displayCurRr + ' RR)' : '');
+    sumEnd.textContent = (VAL_RANKS[di] || '-') + (desRange && displayDesRr > 0 ? ' (' + displayDesRr + ' RR)' : '');
+
+    // Validate: desired must be higher position overall
+    const curPos = ci * 100 + curRr;
+    const desPos = di * 100 + desRr;
+
+    if (isNaN(di) || desPos <= curPos) {
+      sumPrice.textContent = '$0';
+      etaText.textContent = formatEtaText({});
+      sumMmrRow.style.display = 'none';
+      checkoutBtn.disabled = true;
+      setStatus('bad', 'Desired rank/RR must be higher than current rank/RR.');
+      return;
+    }
+
+    sumMmrRow.style.display = 'none';
+    const isNonNA = (valRegSel.value || 'NA') !== 'NA';
+
+    // RR-aware price calculation for all ranks
+    let price = 0;
+    if (ci === di) {
+      const rrDiff = desRr - curRr;
+      let sp = VAL_PRICES[ci] || VAL_PRICES[VAL_PRICES.length - 1];
+      price = sp * (rrDiff / 100);
+    } else {
+      // Partial first rank (remaining RR)
+      price += VAL_PRICES[ci] * ((100 - curRr) / 100);
+
+      // Full middle ranks
+      for (let i = ci + 1; i < di; i++) {
+        price += VAL_PRICES[i];
+      }
+
+      // Partial desired rank (RR into it)
+      if (desRr > 0 && di < VAL_RANKS.length - 1) {
+        price += VAL_PRICES[di] * (desRr / 100);
+      }
+    }
+
+    // RR win/loss affects price for Immortal+ (higher net RR = fewer games = cheaper)
+    if (ci >= VAL_IMM1_IDX) {
+      const rw = parseInt(valRrWinEl.value, 10);
+      const rl2 = parseInt(valRrLossEl.value, 10);
+      if (rw > 0 && rl2 > 0) {
+        const net = 0.65 * rw - 0.35 * rl2;
+        const def = 0.65 * 20 - 0.35 * 20; // default net at 20/20
+        if (net > 0 && def > 0) {
+          // Dampened: 50% base + 50% scaled
+          price *= (0.5 + 0.5 * (def / net));
+        }
+      }
+    }
+
+    // Additive multipliers: base * (1 + duo_bonus + region_bonus)
+    let mult = 1;
+    if (valMethod === 'Duo') mult += 0.5;
+    if (isNonNA) mult += 0.5;
+    price *= mult;
+
+    price = Math.ceil(price);
+    if (di >= VAL_IMM1_IDX || ci >= VAL_IMM1_IDX) price = Math.max(5, price);
+    price = Math.max(1, price);
+
+    // ETA
+    const fracFirst = (100 - curRr) / 100;
+    const fracLast = (di > ci && desRr > 0) ? (desRr / 100) : 0;
+    const niRate = 16 / 21;
+    const imRate = 14 / 3;
+
+    let etaDays = 0;
+    if (ci === di) {
+      const rate = (ci >= VAL_IMM1_IDX) ? imRate : niRate;
+      etaDays = rate * ((desRr - curRr) / 100);
+    } else {
+      etaDays += ((ci >= VAL_IMM1_IDX) ? imRate : niRate) * fracFirst;
+      for (let i = ci + 1; i < di; i++) {
+        etaDays += (i >= VAL_IMM1_IDX) ? imRate : niRate;
+      }
+      if (fracLast > 0 && di < VAL_RANKS.length - 1) {
+        etaDays += ((di >= VAL_IMM1_IDX) ? imRate : niRate) * fracLast;
+      }
+    }
+
+    // Adjust ETA with RR win/loss inputs (Immortal+)
+    if (ci >= VAL_IMM1_IDX) {
+      const rw = parseInt(valRrWinEl.value, 10);
+      const rl2 = parseInt(valRrLossEl.value, 10);
+      if (rw > 0 && rl2 > 0) {
+        const net = 0.65 * rw - 0.35 * rl2;
+        if (net > 0) {
+          const def = 0.65 * 20 - 0.35 * 20;
+          if (def > 0) etaDays = etaDays * (def / net);
+        }
+      }
+    }
+
+    if (valMethod === 'Duo') etaDays *= 2;
+    const days = Math.max(1, Math.ceil(etaDays));
+
+    sumPrice.textContent = '$' + price;
+    etaText.textContent = formatEtaText({ days });
+    checkoutBtn.disabled = false;
+    setStatus('ok', 'Estimate ready: $' + price + ' \u2022 Valorant ' + valMethod + ' boost.');
+  }
+
+  // --- Rainbow Six Siege calculator ---
+  function updateR6(){
+    calcSubtitle.textContent = '#1 R6 Siege Boosting Service';
+    sumGame.textContent = 'Rainbow Six Siege';
+    sumServiceRow.style.display = 'none';
+    sumPlaylistRow.style.display = 'none';
+    sumRewardsRow.style.display = 'none';
+    sumModeRow.style.display = 'flex';
+    sumMode.textContent = r6Method;
+    sumStartRow.style.display = 'flex';
+    sumEndRow.style.display = 'flex';
+    sumStartLabel.textContent = 'Current';
+    sumEndLabel.textContent = 'Desired';
+    const isDuo = r6Method === 'Duo';
+    sumRegionRow.style.display = isDuo ? 'flex' : 'none';
+    sumRegion.textContent = r6RegSel.value || '-';
+
+    const ci = parseInt(r6CurrentEl.value, 10);
+    const di = parseInt(r6DesiredEl.value, 10);
+    sumStart.textContent = R6_RANKS[ci] || '-';
+    sumEnd.textContent = R6_RANKS[di] || '-';
+
+    const crp = parseInt(r6CurrentRpEl.value, 10);
+    const rpIn = (!isNaN(crp) && crp >= 0 && crp <= 99) ? crp : 0;
+    if (!isNaN(crp) && crp >= 0) {
+      sumMmrRow.style.display = 'flex';
+      sumMmrLabel.textContent = 'Current RP';
+      sumMmr.textContent = String(crp);
+    } else {
+      sumMmrRow.style.display = 'none';
+    }
+
+    if (isNaN(di) || di <= ci) {
+      sumPrice.textContent = '$0';
+      etaText.textContent = formatEtaText({});
+      checkoutBtn.disabled = true;
+      setStatus('bad', 'Desired rank must be higher than current rank.');
+      return;
+    }
+
+    // Validate RP range (0-99 within a division)
+    if (!isNaN(crp) && (crp < 0 || crp > 99)) {
+      sumPrice.textContent = '$0';
+      etaText.textContent = formatEtaText({});
+      checkoutBtn.disabled = true;
+      setStatus('bad', 'Current RP must be between 0 and 99.');
+      return;
+    }
+
+    const isNonNA = isDuo && (r6RegSel.value || 'NA') !== 'NA';
+
+    let price = 0;
+    for (let i = ci; i < di; i++) {
+      price += R6_PRICES[i];
+    }
+    // Discount for current RP progress in division
+    if (rpIn > 0 && ci < di) {
+      price -= R6_PRICES[ci] * (rpIn / R6_RP_PER_DIV);
+    }
+
+    // RP per win affects price: dampened - 70% base + 30% scaled by RP ratio
+    const rpw = parseInt(r6RpWinEl.value, 10);
+    if (rpw > 0 && rpw !== 30) {
+      price *= (0.7 + 0.3 * (30 / rpw));
+    }
+
+    // Additive multipliers: base * (1 + duo_bonus + region_bonus)
+    let mult = 1;
+    if (isDuo) mult += 0.5;
+    if (isNonNA) mult += 0.5;
+    price *= mult;
+
+    price = Math.max(1, Math.ceil(price));
+
+    const totalRp = (di - ci) * R6_RP_PER_DIV - rpIn;
+    let days;
+    if (rpw > 0) {
+      const winsNeeded = Math.ceil(totalRp / rpw);
+      days = Math.max(1, Math.ceil(winsNeeded / 6));
+    } else {
+      days = Math.max(1, Math.ceil(R6_FULL_ETA_DAYS * totalRp / 3000));
+    }
+    if (r6Method === 'Duo') days = Math.max(1, Math.ceil(days * 2));
+
+    sumPrice.textContent = '$' + price;
+    etaText.textContent = formatEtaText({ days });
+    checkoutBtn.disabled = false;
+    setStatus('ok', 'Estimate ready: $' + price + ' \u2022 R6 Siege ' + r6Method + ' boost.');
+  }
+
+  // --- Game switching ---
+  function setActiveGame(g){
+    activeGame = g;
+    sfx('switch');
+    closeAllCustomSelects();
+    document.querySelectorAll('.game-btn').forEach(b => b.classList.toggle('active', b.dataset.game === g));
+    document.querySelectorAll('.game-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(g + 'Panel').classList.add('active');
+    masterUpdate();
+  }
+
+  function masterUpdate(){
+    if (activeGame === 'rl') {
+      calcSubtitle.textContent = '#1 Rocket League Boosting Service';
+      sumGame.textContent = 'Rocket League';
+      sumServiceRow.style.display = 'flex';
+      update();
+    }
+    else if (activeGame === 'fortnite') updateFortnite();
+    else if (activeGame === 'valorant') updateValorant();
+    else if (activeGame === 'r6') updateR6();
+  }
+
+  // Game selector listeners
+  document.querySelectorAll('.game-btn').forEach(b => {
+    b.addEventListener('click', () => setActiveGame(b.dataset.game));
+  });
+
+  // Fortnite listeners
+  fnCurrentEl.addEventListener('change', () => { sfx('tap'); populateFnDesired(); csFnDes.render(); csFnCur.render(); masterUpdate(); });
+  fnDesiredEl.addEventListener('change', () => { sfx('tap'); csFnDes.render(); masterUpdate(); });
+  fnCompletionEl.addEventListener('input', () => masterUpdate());
+  fnPrPointsEl.addEventListener('input', () => masterUpdate());
+  document.getElementById('fnMode').addEventListener('change', () => { sfx('tap'); csFnMode.render(); masterUpdate(); });
+  fnRegSel.addEventListener('change', () => { sfx('tap'); csFnReg.render(); masterUpdate(); });
+
+  // Valorant listeners
+  valCurrentEl.addEventListener('change', () => { sfx('tap'); populateValDesired(); csValDes.render(); csValCur.render(); masterUpdate(); });
+  valDesiredEl.addEventListener('change', () => { sfx('tap'); csValDes.render(); masterUpdate(); });
+  valRegSel.addEventListener('change', () => { sfx('tap'); csValReg.render(); masterUpdate(); });
+  [valCurrentRrEl, valDesiredRrEl, valRrWinEl, valRrLossEl].forEach(el => {
+    el.addEventListener('blur', () => masterUpdate());
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.target.blur(); } });
+  });
+
+  // R6 listeners
+  r6CurrentEl.addEventListener('change', () => { sfx('tap'); populateR6Desired(); csR6Des.render(); csR6Cur.render(); masterUpdate(); });
+  r6DesiredEl.addEventListener('change', () => { sfx('tap'); csR6Des.render(); masterUpdate(); });
+  r6RegSel.addEventListener('change', () => { sfx('tap'); csR6Reg.render(); masterUpdate(); });
+  [r6CurrentRpEl, r6RpWinEl].forEach(el => {
+    el.addEventListener('blur', () => masterUpdate());
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') { e.target.blur(); } });
+  });
+</script>
+</body>
+</html>
+
